@@ -27,3 +27,5 @@ Scripts with the letter 'w' in the name allow you to see what is actually happen
 For other scripts if you want to record another model at the same time then you need to start another copy of `c4.bat`. 
 All scripts have the ability to display some basic data about the models (Age, Location, Relationship Status and Occupation - Job).
 Capture is best abort with Ctrl-C or by clicking 'x' at the top right corner of the script window If Ctrl-C does not react.
+
+![alt screenshot](./c4-py.jpg)
