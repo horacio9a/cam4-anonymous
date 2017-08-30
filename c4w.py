@@ -1,4 +1,4 @@
-# Cam4 Anonymous Freechat RTMP Recorder v.1.0.0 by horacio9a for Python 2.7.13
+# Cam4 Anonymous Freechat RTMP Recorder v.1.0.1 by horacio9a for Python 2.7.13
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -21,7 +21,7 @@ while True:
          for (num,value) in enumerate(modellist):
             print ' =>',(num+1),value[:-1]
          print
-         mn = int(raw_input(colored(" => Select C4 Model URL => ", 'yellow', 'on_blue')))
+         mn = int(raw_input(colored(" => Select C4 Model => ", 'yellow', 'on_blue')))
          print
          break
      except ValueError:
@@ -69,8 +69,8 @@ if "Trending Cams" not in dec:
  except:
    occ = ''
 
-   print (colored(' => Age:{} * Location:{} * Status:{} * Job:{} <=', 'yellow', 'on_blue')).format(age,loc,sta,occ)
-   print
+ print (colored(' => Age:{} * Location:{} * Status:{} * Job:{} <=', 'yellow', 'on_blue')).format(age,loc,sta,occ)
+ print
 
  if "cam-offline" in dec:
    vau0 = dec.split('videoAppUrl=')[1]
