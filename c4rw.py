@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous Freechat RTMP Recorder v.1.0.2 by horacio9a for Python 2.7.13
+# Cam4 Remote Anonymous RTMP Recorder v.1.0.3 by horacio9a for Python 2.7.13
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -75,6 +75,8 @@ if "Trending Cams" not in dec:
       vpu0 = dec.split('videoPlayUrl=')[1]
       vpu = vpu0.split('&')[0]
 
+      model0 = vpu.split('-')[0]
+
       swf0 = dec.split('data="')[1]
       swf = swf0.split('"')[0]
 
@@ -85,7 +87,7 @@ if "Trending Cams" not in dec:
 
       timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
       path = config.get('folders', 'output_folder')
-      filename = model + '_C4_' + timestamp + '.flv'
+      filename = model0 + '_C4_' + timestamp + '.flv'
       pf = (path + filename)
 
       print (colored(' => Start rtmpdump => RECORD => {} <=', 'yellow', 'on_red')).format(filename)
