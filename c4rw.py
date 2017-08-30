@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous Freechat RTMP Recorder v.1.0.1 by horacio9a for Python 2.7.13
+# Cam4 Remote Anonymous Freechat RTMP Recorder v.1.0.2 by horacio9a for Python 2.7.13
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -37,8 +37,8 @@ if "Trending Cams" not in dec:
    loc0 = dec.split('Location:</')[1]
    loc1 = loc0.split('</')[0]
    loc2 = loc1.split('">')[1]
-   loc3 = re.sub(',', ' ', loc2)
-   loc = re.sub('  ', '', loc3)
+   loc3 = re.sub(',', '', loc2)
+   loc = re.sub(' ', '', loc3)
  except:
    loc = ''
 
@@ -60,10 +60,16 @@ if "Trending Cams" not in dec:
  print
 
  if "cam-offline" in dec:
-   vau0 = dec.split('videoAppUrl=')[1]
-   vau1 = vau0.split('&')[0]
-   vau2 = re.sub('rtmp://', '', vau1)
-   vau = re.sub('/cam4-edge-live', '', vau2)
+  vau0 = dec.split('videoAppUrl=')[1]
+  vau1 = vau0.split('&')[0]
+  vau2 = re.sub('rtmp://', '', vau1)
+  vau = re.sub('/cam4-edge-live', '', vau2)
+
+  if len(vau) > 20:
+   print(colored(" => TRY AGAIN <= ", 'yellow','on_blue'))
+   sys.exit()
+  else:
+   pass
 
    if len(vau) > 1:
       vpu0 = dec.split('videoPlayUrl=')[1]
@@ -108,6 +114,6 @@ if "Trending Cams" not in dec:
 else:
    print(colored(" => Page Not Found <= ", 'yellow','on_red'))
    print
-   print(colored(" => Waiting for 3 seconds <= ", 'yellow','on_blue'))
-   time.sleep(3)    # pause 3 second
+   time.sleep(1)    # pause 1 second
+   print(colored(" => END <= ", 'yellow','on_blue'))
    sys.exit()
