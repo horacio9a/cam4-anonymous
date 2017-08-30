@@ -28,4 +28,10 @@ For other scripts if you want to record another model at the same time then you 
 All scripts have the ability to display some basic data about the models (Age, Location, Relationship Status and Occupation - Job).
 Capture is best abort with Ctrl-C or by clicking 'x' at the top right corner of the script window If Ctrl-C does not react.
 
+c4.py screenshot:
+
 ![alt screenshot](./c4-py.jpg)
+
+c4rw.py screenshot:
+
+![alt screenshot](./c4rw-py.jpg)
