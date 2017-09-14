@@ -93,7 +93,7 @@ if "Trending Cams" not in dec:
 
       print (colored(' => REC => {} <=', 'yellow', 'on_red')).format(filename)
       print
-      command = 'start {} -r"{}" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau1,swf,vpu,pf)
+      command = '{} -r"{}" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau1,swf,vpu,pf)
       os.system(command)
       print
       time.sleep(1)    # pause 1 second
