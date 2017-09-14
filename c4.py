@@ -1,4 +1,4 @@
-# Cam4 Anonymous RTMP Recorder v.1.0.3 by horacio9a for Python 2.7.13
+# Cam4 Anonymous RTMP Recorder v.1.0.4 by horacio9a for Python 2.7.13
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -12,22 +12,22 @@ config.read('config.cfg')
 
 init()
 print
-print(colored(" => START <= ", 'yellow', 'on_blue'))
+print(colored(" => START <=", 'yellow', 'on_blue'))
 print
 
 while True:
-     try:
-         modellist = open(config.get('files', 'model_list'),'r')
-         for (num,value) in enumerate(modellist):
-            print ' =>',(num+1),value[:-1]
-         print
-         mn = int(raw_input(colored(" => Select C4 Model => ", 'yellow', 'on_blue')))
-         print
-         break
-     except ValueError:
-         print
-         print(colored(" => Input must be a number <= ", 'yellow', 'on_red'))
-         print
+   try:
+      modellist = open(config.get('files', 'model_list'),'r')
+      for (num,value) in enumerate(modellist):
+         print ' =>',(num+1),value[:-1]
+      print
+      mn = int(raw_input(colored(" => Select C4 Model => ", 'yellow', 'on_blue')))
+      print
+      break
+   except ValueError:
+      print
+      print(colored(" => Input must be a number <=", 'yellow', 'on_red'))
+      print
 model = open(config.get('files', 'model_list'), 'r').readlines()[mn-1][:-1]
 print (colored(' => Selected C4 Model => {} <=', 'yellow', 'on_blue')).format(model)
 print
@@ -80,7 +80,7 @@ if "Trending Cams" not in dec:
   vau = re.sub('/cam4-edge-live', '', vau2)
 
   if len(vau) > 20:
-   print(colored(" => TRY AGAIN <= ", 'yellow','on_blue'))
+   print(colored(" => TRY AGAIN <=", 'yellow','on_blue'))
    sys.exit()
   else:
    pass
@@ -94,41 +94,42 @@ if "Trending Cams" not in dec:
       swf0 = dec.split('data="')[1]
       swf = swf0.split('"')[0]
 
-      print (colored(' => App URL: {} <= ', 'white', 'on_blue')).format(vau)
+      print (colored(' => App URL => {} <=', 'white', 'on_blue')).format(vau)
       print
-      print (colored(' => Play URL: {} <= ', 'white', 'on_blue')).format(vpu)
+      print (colored(' => Play URL => {} <=', 'white', 'on_blue')).format(vpu)
       print
 
       timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
       path = config.get('folders', 'output_folder')
       filename = model0 + '_C4_' + timestamp + '.flv'
       pf = (path + filename)
+      rtmp = config.get('files', 'rtmpdump')
 
-      print (colored(' => Start rtmpdump => RECORD => {} <=', 'yellow', 'on_red')).format(filename)
-      command = 'rtmpdump -r"{}" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}" -q'.format(vau1,swf,vpu,pf)
+      print (colored(' => REC => {} <=', 'yellow', 'on_red')).format(filename)
+      command = '{} -r"{}" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}" -q'.format(rtmp,vau1,swf,vpu,pf)
       os.system(command)
       print
       time.sleep(1)    # pause 1 second
-      print(colored(" => END <= ", 'yellow','on_blue'))
+      print(colored(" => END <=", 'yellow','on_blue'))
       sys.exit()
 
    else:
       print(colored(" => Model in PRIVATE or AWAY ", 'yellow','on_red'))
       print
       time.sleep(1)    # pause 1 second
-      print(colored(" => END <= ", 'yellow','on_blue'))
+      print(colored(" => END <=", 'yellow','on_blue'))
       sys.exit()
 
  else:
-   print(colored(" => Model is OFFLINE <= ", 'yellow','on_red'))
+   print(colored(" => Model is OFFLINE <=", 'yellow','on_red'))
    print
    time.sleep(1)    # pause 1 second
-   print(colored(" => END <= ", 'yellow','on_blue'))
+   print(colored(" => END <=", 'yellow','on_blue'))
    sys.exit()
 
 else:
-   print(colored(" => Page Not Found <= ", 'yellow','on_red'))
+   print(colored(" => Page Not Found <=", 'yellow','on_red'))
    print
    time.sleep(1)    # pause 1 second
-   print(colored(" => END <= ", 'yellow','on_blue'))
+   print(colored(" => END <=", 'yellow','on_blue'))
    sys.exit()
