@@ -6,15 +6,15 @@ You don't need to be registered cam4 user for recording models with this cam4-an
 
 Requirements
 ============
-[Python 2.7.13](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi)
-[RTMPDump(ksv)](https://github.com/K-S-V/Scripts/releases) used to capture the streams must be somewere in the path or in directory with this script.
+1. Download here [Python 2.7.13](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi) instalation. Those who need to install python should watch this [video](https://www.youtube.com/watch?v=QYUBz4mrnFU)
+2. Download here [RTMPDump(ksv)](https://github.com/K-S-V/Scripts/releases) used to capture the streams. Default location is C:/Windows, otherwise `config.cfg` must be edited
 
 Setup
 =====
 1. Install requirements `pip install -r Requirements.txt`
 2. Download and unpack the [code](https://codeload.github.com/horacio9a/cam4-anonymous/zip/master).
 3. Open console and go into the directory where you unpacked the files (default is C:/-c4-py/)
-4. c4.bat can be anywhere (default is C:/Windows/)
+4. c4.bat can be anywhere (default is C:/Windows)
 5. Edit `config.cfg` to your wish or accept default data.
 
 Running & Output
