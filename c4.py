@@ -1,7 +1,8 @@
-# Cam4 Anonymous RTMP Recorder v.1.0.4 by horacio9a for Python 2.7.13
+# Cam4 Anonymous RTMP Recorder v.1.0.5 by horacio9a for Python 2.7.13
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
+from urllib3 import PoolManager
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from colorama import init, Fore, Back, Style
@@ -33,11 +34,10 @@ print (colored(' => Selected C4 Model => {} <=', 'yellow', 'on_blue')).format(mo
 print
 
 url ='https://www.cam4.com/{}'.format(model)
-http_pool = urllib3.connection_from_url(url)
-r = http_pool.urlopen('GET',url)
+manager = PoolManager(10)
+r = manager.request('GET', url)
 enc = (r.data)
 dec=urllib.unquote(enc).decode()
-#dec0=urllib.unquote(enc).decode('cp1250')
 
 if "Trending Cams" not in dec:
  try:
