@@ -46,7 +46,7 @@ SET _fav!n!=%%A
 ECHO !n! %%A
 )
 ECHO.
-SET /P MODEL=Choose C4 MODEL Name (%M%:%MODEL%): 
+SET /P MODEL=Choose C4 MODEL Name (%M% %MODEL%): 
 FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
@@ -79,7 +79,7 @@ SET _fav!n!=%%A
 ECHO !n! %%A
 )
 ECHO.
-SET /P MODEL=Choose C4 MODEL Name (%M%:%MODEL%): 
+SET /P MODEL=Choose C4 MODEL Name (%M% %MODEL%): 
 FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
@@ -112,7 +112,7 @@ SET _fav!n!=%%A
 ECHO !n! %%A
 )
 ECHO.
-SET /P MODEL=Choose C4 MODEL Name (%M%:%MODEL%): 
+SET /P MODEL=Choose C4 MODEL Name (%M% %MODEL%): 
 FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
@@ -145,7 +145,7 @@ SET _fav!n!=%%A
 ECHO !n! %%A
 )
 ECHO.
-SET /P MODEL=Choose C4 MODEL Name (%M%:%MODEL%): 
+SET /P MODEL=Choose C4 MODEL Name (%M% %MODEL%): 
 FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
