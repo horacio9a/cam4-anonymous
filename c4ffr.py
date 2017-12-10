@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous FFMPEG Recorder v.1.0.6 by horacio9a for Python 2.7.13
+# Cam4 Remote Anonymous FFMPEG Recorder v.1.0.7 by horacio9a for Python 2.7.13
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -24,10 +24,24 @@ url ='https://www.cam4.com/{}'.format(model)
 user_agent = {'user-agent': 'Mozilla/5.0 (Android; Mobile; rv:14.0) ..'}
 http = urllib3.PoolManager(10, headers=user_agent)
 r = http.urlopen('GET',url)
-dec = (r.data)
-#dec=urllib.unquote(enc).decode()
+enc = (r.data)
+dec=urllib.unquote(enc).decode()
 
-if "Trending Cams" not in dec:
+state0 = dec.split("showState: '")[1]
+state = state0.split("'")[0]
+
+if len(state) == 0:
+   print(colored(" => Model is OFFLINE or wrong name<=", 'yellow','on_blue'))
+   print
+   print(colored(" => END <=", 'yellow','on_blue'))
+   sys.exit()
+else:
+   pass
+
+print (colored(' => Model State => {} <=', 'white', 'on_green')).format(state)
+print
+
+if len(state) > 0:
  try:
    age0 = dec.split('Age:</')[1]
    age1 = age0.split('</')[0]
@@ -61,61 +75,40 @@ if "Trending Cams" not in dec:
  print (colored(' => Age:{} * Location:{} * Status:{} * Job:{} <=', 'yellow', 'on_blue')).format(age,loc,sta,occ)
  print
 
- if "rtmp:" in dec:
-  vau0 = dec.split('rtmp://')[1]
-  vau = vau0.split('/')[0]
+ vau0 = dec.split('rtmp://')[1]
+ vau = vau0.split('/')[0]
 
-  if len(vau) > 30:
-   print(colored(" => TRY AGAIN <=", 'yellow','on_blue'))
-   sys.exit()
-  else:
-   pass
-
-   if len(vau) > 1:
-      hlsurl0 = dec.split("hlsUrl: '")[1]
-      hlsurl = hlsurl0.split("'")[0]
-
-      vpu0 = dec.split('videoPlayUrl":"')[1]
-      vpu = vpu0.split('"')[0]
-
-      model0 = vpu.split('-')[0]
-
-      swf0 = dec.split('playerUrl":"')[1]
-      swf = swf0.split('"')[0]
-
-      print (colored(' => App URL => {} <=', 'yellow', 'on_blue')).format(vau)
-      print
-      print (colored(' => Play URL => {} <=', 'yellow', 'on_blue')).format(vpu)
-      print
-
-      timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
-      stime = str(time.strftime("%H:%M:%S"))
-      path = config.get('folders', 'output_folder')
-      filename = model0 + '_C4_' + timestamp
-      ffmpeg = config.get('files', 'ffmpeg')
-      fn = filename + '.flv'
-      pf = (path + fn)
-      print (colored(' => FFMPEG-REC => {} <=', 'yellow', 'on_red')).format(fn)
-      print
-      command = ('{} -loglevel panic -i "{}" -c:v copy -c:a aac -b:a 160k "{}"'.format(ffmpeg,hlsurl,pf))
-      os.system(command)
-      print(colored(" => END <=", 'yellow','on_blue'))
-      sys.exit()
-
-   else:
-      print(colored(" => Model in PRIVATE or AWAY ", 'yellow','on_red'))
-      print
-      print(colored(" => END <=", 'yellow','on_blue'))
-      sys.exit()
-
+ if len(vau) > 30:
+    print(colored(" => TRY AGAIN <=", 'yellow','on_blue'))
+    sys.exit()
  else:
-   print(colored(" => Model is OFFLINE <=", 'yellow','on_red'))
-   print
-   print(colored(" => END <=", 'yellow','on_blue'))
-   sys.exit()
+    pass
 
-else:
-   print(colored(" => Page Not Found <=", 'yellow','on_red'))
+ if len(vau) > 1:
+   vpu0 = dec.split('videoPlayUrl":"')[1]
+   vpu = vpu0.split('"')[0]
+   rname = vpu.split('-')[0]
+   lwcdn = vpu.split('-')[1]
+
+   hlsurl0 = dec.split("hlsUrl: '")[1]
+   hlsurl = hlsurl0.split("'")[0]
+   purl0 =  hlsurl.split('live/')[1]
+   purl =  purl0.split('/')[0]
+   hlsurl1 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(lwcdn,vpu)
+   hlsurl2 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(lwcdn,vpu)
+   hlsurl3 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/{}_aac/playlist.m3u8'.format(lwcdn,vpu)
+   print (colored(' => Play URL => {} <=', 'yellow', 'on_blue')).format(purl)
    print
+
+   timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
+   path = config.get('folders', 'output_folder')
+   filename = rname + '_C4_' + timestamp
+   ffmpeg = config.get('files', 'ffmpeg')
+   fn = filename + '.flv'
+   pf = (path + fn)
+   print (colored(' => FFMPEG-REC => {} <=', 'yellow', 'on_red')).format(fn)
+   print
+   command = ('{} -hide_banner -loglevel panic -i "{}" -c:v copy -c:a aac -b:a 160k "{}"'.format(ffmpeg,hlsurl,pf))
+   os.system(command)
    print(colored(" => END <=", 'yellow','on_blue'))
    sys.exit()
