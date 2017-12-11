@@ -106,5 +106,6 @@ if len(state) > 0:
    print
    command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf)
    os.system(command)
+   print
    print(colored(" => END <=", 'yellow','on_blue'))
    sys.exit()
