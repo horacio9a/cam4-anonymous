@@ -1,13 +1,14 @@
 cam4-anonymous
 ====================
 cam4-anonymous lets you follow and archive your selected models' shows on www.cam4.com
-So it does not favorites than selected models, which makes it easy to record specific models at a given time, not all the favorites that can be accumulated and too much for our disk free space;)
 You don't need to be registered cam4 user for recording models with this cam4-anonymous script.
 
 Requirements
 ============
 1. Download here [Python 2.7.13](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi) instalation. Those who need to install python should watch this [video](https://www.youtube.com/watch?v=QYUBz4mrnFU)
-2. Download here [RTMPDump(ksv)](https://github.com/K-S-V/Scripts/releases) used to capture the streams. Default location is C:/Windows, otherwise `config.cfg` must be edited
+2. Download here [RTMPDump(ksv)](https://github.com/K-S-V/Scripts/releases) used for recording the streams.
+3. Download here [ffmpeg and ffplay](https://ffmpeg.zeranoe.com/builds/) who must be somewere in the path, default location is 'C:/Windows'
+4. Download here [youtube-dl](https://github.com/rg3/youtube-dl) who must be somewere in the path, default location is 'C:/Windows'
 
 Setup
 =====
@@ -19,19 +20,24 @@ Setup
 
 Running & Output
 ================
-It's best to use 'Command Promt' first to install `Requirements.txt` and to try the basic `c4.py` script. 
-For use these scripts it would be good to make a shortcut and put it in the task bar for easier startup. 
-All scripts now use the same text file where is stored your favorite models, default is `C:\-c4-py\C4_Model.txt`. 
-However, if you want to record a certain model permanently (24/7), then you need to use `c4.bat`, options number 2 and 3 to start `c4r.py` and `c4rw.py`.
-Scripts with the letter 'w' in the name allow you to see what is actually happening in a separate rtmpdump window and make it easier to stop recording. Script `c4w.py` also allow for use the same script copy to start recording more models.
-For other scripts if you want to record another model at the same time then you need to start another copy of `c4.bat`. 
+It's best to use 'Command Promt' first to install `Requirements.txt`. You can also install the modules individually with the command 'pip install SomePackage==1.0.4 # specific version'
+For use these scripts it would be good to make a shortcut for `c4.bat` and put it in the task bar for easier startup. 
+All scripts using the same text file where is stored models for recordings, default is `C:\-c4-py\C4_Model.txt`. 
+However, if you want to record a certain model permanently (24/7), then you need to use `c4.bat`, options numbers 2 to 5 for start rtmpdump, youtube-dl, ffmpeg or streamlink.
+Default script is 'c4a.py' letter 'a' in the name means 'ALL' for 'all mode' record and play with hidden script traffic. 
+Script 'c4aw.py' letter 'w' in the name means 'window' allow you to see what is actually happening in a separate window and make it easier to stop recording.
+If you want to record more models at the same time then you need to start another copy of `c4.bat`. 
 All scripts have the ability to display some basic data about the models (Age, Location, Relationship Status and Occupation - Job).
-Capture is best abort with Ctrl-C or by clicking 'x' at the top right corner of the script window If Ctrl-C does not react.
+Break recording is with with Ctrl-C or by clicking 'x' at the top right corner of the script window If Ctrl-C does not react.
 
-c4.py screenshot:
+screenshot0:
 
-![alt screenshot](./c4-py.jpg)
+![alt screenshot](./screenshot0.jpg)
 
-c4rw.py screenshot:
+screenshot1:
 
-![alt screenshot](./c4rw-py.jpg)
+![alt screenshot](./screenshot1.jpg)
+
+screenshot2:
+
+![alt screenshot](./screenshot2.jpg)
