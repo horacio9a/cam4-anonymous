@@ -90,13 +90,13 @@ if len(state) > 0:
    rname = vpu.split('-')[0]
    lwcdn = vpu.split('-')[1]
 
-   hlsurl0 = dec.split("hlsUrl: '")[1]
-   hlsurl = hlsurl0.split("'")[0]
-   purl0 =  hlsurl.split('live/')[1]
-   purl =  purl0.split('/')[0]
    hlsurl1 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(lwcdn,vpu)
    hlsurl2 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(lwcdn,vpu)
-   hlsurl3 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/{}_aac/playlist.m3u8'.format(lwcdn,vpu)
+   hlsurl = 'https://lwcdn-{}.cam4.com/cam4-origin-live/{}_aac/playlist.m3u8'.format(lwcdn,vpu)
+   hlsurl0 = dec.split("hlsUrl: '")[1]
+#   hlsurl = hlsurl0.split("'")[0]
+   purl0 = hlsurl.split('live/')[1]
+   purl = purl0.split('/')[0]
    print (colored(' => Play URL => {} <=', 'yellow', 'on_blue')).format(purl)
    print
 
