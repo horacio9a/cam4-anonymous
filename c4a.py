@@ -123,7 +123,9 @@ if len(state) > 0:
          print
          break
       except ValueError:
-         print(colored("\n => Input must be a number <=", "yellow", "on_red"))
+         print
+         print(colored(" => Input must be a number <=", "yellow", "on_red"))
+         print
    if mode == 0:
         mod = 'RTMP'
    if mode == 1:
