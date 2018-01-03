@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous RTMP Recorder v.1.0.7 by horacio9a for Python 2.7.13
+# Cam4 Remote Anonymous RTMP Recorder v.1.0.8 by horacio9a for Python 2.7.14
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -12,9 +12,7 @@ config = ConfigParser.ConfigParser()
 config.read('config.cfg')
 
 init()
-print
-print(colored(" => START <=", 'yellow', 'on_blue'))
-print
+print(colored('\n => START <=', 'yellow', 'on_blue'))
 
 if __name__=='__main__':
    import sys
@@ -30,24 +28,13 @@ dec=urllib.unquote(enc).decode()
 state0 = dec.split("showState: '")[1]
 state = state0.split("'")[0]
 
-if len(state) == 0:
-   print(colored(" => Model is OFFLINE or wrong name<=", 'yellow','on_blue'))
-   print
-   print(colored(" => END <=", 'yellow','on_blue'))
-   sys.exit()
-else:
-   pass
-
-print (colored(' => Model State => {} <=', 'white', 'on_green')).format(state)
-print
-
 if len(state) > 0:
  try:
    age0 = dec.split('Age:</')[1]
    age1 = age0.split('</')[0]
-   age = age1.split('field">')[1]
+   age = age1.split('">')[1]
  except:
-   age = ''
+   age = '-'
 
  try:
    loc0 = dec.split('Location:</')[1]
@@ -56,56 +43,83 @@ if len(state) > 0:
    loc3 = re.sub(',', '', loc2)
    loc = re.sub(' ', '', loc3)
  except:
-   loc = ''
+   loc = '-'
 
  try:
    sta0 = dec.split('Status:</')[1]
    sta1 = sta0.split('</')[0]
-   sta = sta1.split('field">')[1]
+   sta = sta1.split('">')[1]
  except:
-   sta = ''
+   sta = '-'
 
  try:
-   occ0 = dec.split('Occupation:</')[1]
-   occ1 = occ0.split('</')[0]
-   occ = occ1.split('field">')[1]
+   room0 = dec.split('room":"')[1]
+   room = room0.split('"')[0]
  except:
-   occ = ''
+   room = '-'
 
- print (colored(' => Age:{} * Location:{} * Status:{} * Job:{} <=', 'yellow', 'on_blue')).format(age,loc,sta,occ)
- print
+ try:
+   ms0 = dec.split('Member since:</')[1]
+   ms1 = ms0.split('</')[0]
+   ms2 = ms1.split('">')[1]
+   ms3 = re.sub(' ', '-', ms2)
+   ms = re.sub(',', '', ms3)
+ except:
+   ms = '-'
+
+ try:
+   eth0 = dec.split('Ethnicity:</')[1]
+   eth1 = eth0.split('</')[0]
+   eth2 = eth1.split('">')[1]
+   eth = re.sub(' ', '', eth2)
+ except:
+   eth = '-'
 
  vau0 = dec.split('rtmp://')[1]
  vau = vau0.split('/')[0]
- print (colored(' => App URL => {} <=', 'yellow', 'on_blue')).format(vau)
- print
+
+ vpu0 = dec.split('videoPlayUrl":"')[1]
+ vpu = vpu0.split('"')[0]
+
+ print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
+ print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'yellow', 'on_blue')).format(age,loc,sta,eth)
+
+ vau0 = dec.split('rtmp://')[1]
+ vau = vau0.split('/')[0]
+ print (colored('\n => App URL => {} <=', 'yellow', 'on_blue')).format(vau)
 
  if len(vau) > 30:
-    print(colored(" => TRY AGAIN <=", 'yellow','on_blue'))
+    print(colored('\n => TRY AGAIN <=', 'yellow','on_blue'))
+    time.sleep(3)
+    print(colored('\n => END <=', 'yellow','on_blue'))
+    time.sleep(1)
     sys.exit()
  else:
     pass
 
- if len(vau) > 1:
-   vpu0 = dec.split('videoPlayUrl":"')[1]
-   vpu = vpu0.split('"')[0]
-   rname = vpu.split('-')[0]
-   print (colored(' => Play URL => {} <=', 'yellow', 'on_blue')).format(vpu)
-   print
+ vpu0 = dec.split('videoPlayUrl":"')[1]
+ vpu = vpu0.split('"')[0]
+ print (colored('\n => Play URL => {} <=', 'yellow', 'on_blue')).format(vpu)
 
-   swf0 = dec.split('playerUrl":"')[1]
-   swf = swf0.split('"')[0]
+ swf0 = dec.split('playerUrl":"')[1]
+ swf = swf0.split('"')[0]
 
-   timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
-   path = config.get('folders', 'output_folder')
-   filename = rname + '_C4_' + timestamp
-   rtmp = config.get('files', 'rtmpdump')
-   fn = filename + '.flv'
-   pf = (path + fn)
-   print (colored(' => RTMP-REC => {} <=', 'yellow', 'on_red')).format(fn)
-   print
-   command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf)
-   os.system(command)
-   print
-   print(colored(" => END <=", 'yellow','on_blue'))
+ timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
+ path = config.get('folders', 'output_folder')
+ filename = room + '_C4_' + timestamp
+ rtmp = config.get('files', 'rtmpdump')
+ filename = room + '_C4_' + timestamp + '.flv'
+ pf = path + filename
+ print (colored('\n => RTMP-REC => {} <=', 'yellow', 'on_red')).format(filename)
+ print
+ command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf)
+ os.system(command)
+ print(colored('\n => END <=', 'yellow','on_blue'))
+ sys.exit()
+
+else:
+   print (colored('\n => Model ({}) is OFFLINE or ERROR name <=', 'white', 'on_red')).format(model)
+   time.sleep(3)
+   print(colored('\n => END <=', 'yellow','on_blue'))
+   time.sleep(1)
    sys.exit()
