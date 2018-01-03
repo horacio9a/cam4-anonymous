@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous FFMPEG Recorder v.1.0.7 by horacio9a for Python 2.7.13
+# Cam4 Remote Anonymous FFMPEG Recorder v.1.0.8 by horacio9a for Python 2.7.14
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -12,9 +12,7 @@ config = ConfigParser.ConfigParser()
 config.read('config.cfg')
 
 init()
-print
-print(colored(" => START <=", 'yellow', 'on_blue'))
-print
+print(colored('\n => START <=', 'yellow', 'on_blue'))
 
 if __name__=='__main__':
    import sys
@@ -30,24 +28,13 @@ dec=urllib.unquote(enc).decode()
 state0 = dec.split("showState: '")[1]
 state = state0.split("'")[0]
 
-if len(state) == 0:
-   print(colored(" => Model is OFFLINE or wrong name<=", 'yellow','on_blue'))
-   print
-   print(colored(" => END <=", 'yellow','on_blue'))
-   sys.exit()
-else:
-   pass
-
-print (colored(' => Model State => {} <=', 'white', 'on_green')).format(state)
-print
-
 if len(state) > 0:
  try:
    age0 = dec.split('Age:</')[1]
    age1 = age0.split('</')[0]
-   age = age1.split('field">')[1]
+   age = age1.split('">')[1]
  except:
-   age = ''
+   age = '-'
 
  try:
    loc0 = dec.split('Location:</')[1]
@@ -56,59 +43,79 @@ if len(state) > 0:
    loc3 = re.sub(',', '', loc2)
    loc = re.sub(' ', '', loc3)
  except:
-   loc = ''
+   loc = '-'
 
  try:
    sta0 = dec.split('Status:</')[1]
    sta1 = sta0.split('</')[0]
-   sta = sta1.split('field">')[1]
+   sta = sta1.split('">')[1]
  except:
-   sta = ''
+   sta = '-'
 
  try:
-   occ0 = dec.split('Occupation:</')[1]
-   occ1 = occ0.split('</')[0]
-   occ = occ1.split('field">')[1]
+   room0 = dec.split('room":"')[1]
+   room = room0.split('"')[0]
  except:
-   occ = ''
+   room = '-'
 
- print (colored(' => Age:{} * Location:{} * Status:{} * Job:{} <=', 'yellow', 'on_blue')).format(age,loc,sta,occ)
- print
+ try:
+   ms0 = dec.split('Member since:</')[1]
+   ms1 = ms0.split('</')[0]
+   ms2 = ms1.split('">')[1]
+   ms3 = re.sub(' ', '-', ms2)
+   ms = re.sub(',', '', ms3)
+ except:
+   ms = '-'
 
- vau0 = dec.split('rtmp://')[1]
- vau = vau0.split('/')[0]
+ try:
+   eth0 = dec.split('Ethnicity:</')[1]
+   eth1 = eth0.split('</')[0]
+   eth2 = eth1.split('">')[1]
+   eth = re.sub(' ', '', eth2)
+ except:
+   eth = '-'
 
- if len(vau) > 30:
-    print(colored(" => TRY AGAIN <=", 'yellow','on_blue'))
+ vpu0 = dec.split('videoPlayUrl":"')[1]
+ vpu = vpu0.split('"')[0]
+
+ if len(vpu) > 80:
+    print(colored('\n => TRY AGAIN <=', 'yellow','on_blue'))
+    time.sleep(3)
+    print(colored('\n => END <=', 'yellow','on_blue'))
+    time.sleep(1)
     sys.exit()
  else:
     pass
 
- if len(vau) > 1:
-   vpu0 = dec.split('videoPlayUrl":"')[1]
-   vpu = vpu0.split('"')[0]
-   rname = vpu.split('-')[0]
-   lwcdn = vpu.split('-')[1]
+ wcdn = vpu.split('-')[1]
 
-   hlsurl1 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(lwcdn,vpu)
-   hlsurl2 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(lwcdn,vpu)
-   hlsurl = 'https://lwcdn-{}.cam4.com/cam4-origin-live/{}_aac/playlist.m3u8'.format(lwcdn,vpu)
-   hlsurl0 = dec.split("hlsUrl: '")[1]
-#   hlsurl = hlsurl0.split("'")[0]
-   purl0 = hlsurl.split('live/')[1]
-   purl = purl0.split('/')[0]
-   print (colored(' => Play URL => {} <=', 'yellow', 'on_blue')).format(purl)
-   print
+ print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
+ print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'yellow', 'on_blue')).format(age,loc,sta,eth)
 
-   timestamp = str(time.strftime("%d%m%Y-%H%M%S"))
-   path = config.get('folders', 'output_folder')
-   filename = rname + '_C4_' + timestamp
-   ffmpeg = config.get('files', 'ffmpeg')
-   fn = filename + '.flv'
-   pf = (path + fn)
-   print (colored(' => FFMPEG-REC => {} <=', 'yellow', 'on_red')).format(fn)
-   print
-   command = ('{} -hide_banner -loglevel panic -i "{}" -c:v copy -c:a aac -b:a 160k "{}"'.format(ffmpeg,hlsurl,pf))
-   os.system(command)
-   print(colored(" => END <=", 'yellow','on_blue'))
+ hlsurl1 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(wcdn,vpu)
+ hlsurl2 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(wcdn,vpu)
+ hlsurl = 'https://lwcdn-{}.cam4.com/cam4-origin-live/{}_aac/playlist.m3u8'.format(wcdn,vpu)
+ hls_url0 = dec.split("hlsUrl: '")[1]
+ hls_url1 = hls_url0.split("'")[0]
+ hls_url2 = hls_url1.split('live/')[1]
+ hls_url = hls_url2.split('/')[0]
+ print (colored('\n => Play URL => {} <=', 'yellow', 'on_blue')).format(hls_url)
+
+ timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
+ path = config.get('folders', 'output_folder')
+ ffmpeg = config.get('files', 'ffmpeg')
+ filename = room + '_C4_' + timestamp + '.flv'
+ pf = path + filename
+ print (colored('\n => FFMPEG-REC => {} <=', 'yellow', 'on_red')).format(filename)
+ print
+ command = ('{} -loglevel panic -i "{}" -c:v copy -c:a aac -b:a 160k "{}"'.format(ffmpeg,hlsurl,pf))
+ os.system(command)
+ print(colored('\n => END <=', 'yellow','on_blue'))
+ sys.exit()
+
+else:
+   print (colored('\n => Model ({}) is OFFLINE or ERROR name <=', 'white', 'on_red')).format(model)
+   time.sleep(3)
+   print(colored('\n => END <=', 'yellow','on_blue'))
+   time.sleep(1)
    sys.exit()
