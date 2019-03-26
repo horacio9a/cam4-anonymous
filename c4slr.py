@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous STREAMLINK Recorder v.1.0.8 by horacio9a for Python 2.7.14
+# Cam4 Remote Anonymous STREAMLINK Recorder v.1.0.9 by horacio9a for Python 2.7.16
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -92,9 +92,9 @@ if len(state) > 0:
  print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
  print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'yellow', 'on_blue')).format(age,loc,sta,eth)
 
- hlsurl1 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(wcdn,vpu)
- hlsurl2 = 'https://lwcdn-{}.cam4.com/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(wcdn,vpu)
- hlsurl = 'https://lwcdn-{}.cam4.com/cam4-origin-live/{}_aac/playlist.m3u8'.format(wcdn,vpu)
+ hlsurl1 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(wcdn,vpu)
+ hlsurl2 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(wcdn,vpu)
+ hlsurl = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/{}_aac/playlist.m3u8'.format(wcdn,vpu)
  hls_url0 = dec.split("hlsUrl: '")[1]
  hls_url1 = hls_url0.split("'")[0]
  hls_url2 = hls_url1.split('live/')[1]
