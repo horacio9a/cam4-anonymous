@@ -1,4 +1,5 @@
-# Cam4 Remote Anonymous STREAMLINK Recorder v.1.0.9 by horacio9a for Python 2.7.16
+# Cam4 Remote Anonymous STREAMLINK Recorder v.1.1.0 by horacio9a for Python 2.7.18
+# coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -9,10 +10,10 @@ from colorama import init, Fore, Back, Style
 from termcolor import colored
 import ConfigParser
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+config.read('config.ini')
 
 init()
-print(colored('\n => START <=', 'yellow', 'on_blue'))
+print(colored('\n => START <=', 'white', 'on_blue'))
 
 if __name__=='__main__':
    import sys
@@ -79,9 +80,9 @@ if len(state) > 0:
  vpu = vpu0.split('"')[0]
 
  if len(vpu) > 80:
-    print(colored('\n => TRY AGAIN <=', 'yellow','on_blue'))
+    print(colored('\n => TRY AGAIN <=', 'white','on_blue'))
     time.sleep(3)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    print(colored('\n => END <=', 'white','on_blue'))
     time.sleep(1)
     sys.exit()
  else:
@@ -90,7 +91,7 @@ if len(state) > 0:
  wcdn = vpu.split('-')[1]
 
  print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
- print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'yellow', 'on_blue')).format(age,loc,sta,eth)
+ print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'white', 'on_blue')).format(age,loc,sta,eth)
 
  hlsurl1 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(wcdn,vpu)
  hlsurl2 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(wcdn,vpu)
@@ -99,23 +100,22 @@ if len(state) > 0:
  hls_url1 = hls_url0.split("'")[0]
  hls_url2 = hls_url1.split('live/')[1]
  hls_url = hls_url2.split('/')[0]
- print (colored('\n => Play URL => {} <=', 'yellow', 'on_blue')).format(hls_url)
+ print (colored('\n => Play URL => {} <=', 'white', 'on_blue')).format(hls_url)
 
  timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
  path = config.get('folders', 'output_folder')
  streamlink = config.get('files', 'streamlink')
  filename = room + '_C4_' + timestamp + '.mp4'
  pf = path + filename
- print (colored('\n => SL-REC >>> {} <<<', 'yellow', 'on_red')).format(filename)
+ print (colored('\n => SL-REC >>> {} <<<', 'white', 'on_red')).format(filename)
  print
- command = ('{} hls://"{}" best -Q -o "{}"'.format(streamlink,hlsurl,pf))
+ command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf))
  os.system(command)
- print(colored('\n => END <=', 'yellow','on_blue'))
  sys.exit()
 
 else:
    print (colored('\n => Model ({}) is OFFLINE or ERROR name <=', 'white', 'on_red')).format(model)
    time.sleep(3)
-   print(colored('\n => END <=', 'yellow','on_blue'))
+   print(colored('\n => END <=', 'white','on_blue'))
    time.sleep(1)
    sys.exit()
