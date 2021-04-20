@@ -27,7 +27,7 @@ GOTO START
 :C4RR
 ECHO.
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 SET _fav!n!=%%A
 ECHO !n! %%A
@@ -38,7 +38,7 @@ FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 IF !n!==%M% SET MODEL=%%A
 )
@@ -60,7 +60,7 @@ GOTO C4RR_
 :C4FFR
 ECHO.
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 SET _fav!n!=%%A
 ECHO !n! %%A
@@ -71,7 +71,7 @@ FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 IF !n!==%M% SET MODEL=%%A
 )
@@ -93,7 +93,7 @@ GOTO C4FFR_
 :C4SLR
 ECHO.
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 SET _fav!n!=%%A
 ECHO !n! %%A
@@ -104,7 +104,7 @@ FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 IF !n!==%M% SET MODEL=%%A
 )
@@ -126,7 +126,7 @@ GOTO C4SLR_
 :C4YTR
 ECHO.
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 SET _fav!n!=%%A
 ECHO !n! %%A
@@ -137,7 +137,7 @@ FOR /L %%f IN (1,1,!n!) DO (
 IF /I '%MODEL%'=='%%f' SET M=%%f
 )
 SET n=0
-FOR /F "tokens=*" %%A IN (C:/Windows/C4_Model.txt) DO (
+FOR /F "tokens=*" %%A IN (C:/-c4-py/C4_Model.txt) DO (
 SET /A n=n+1
 IF !n!==%M% SET MODEL=%%A
 )
