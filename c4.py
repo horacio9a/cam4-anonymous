@@ -1,4 +1,5 @@
-# Cam4 Anonymous All Modes Recorder v.1.0.9 by horacio9a for Python 2.7.16
+# Cam4 Anonymous All Modes Recorder v.1.1.0 by horacio9a for Python 2.7.18
+# coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -9,20 +10,20 @@ from colorama import init, Fore, Back, Style
 from termcolor import colored
 import ConfigParser
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+config.read('config.ini')
 
 init()
-print(colored('\n => START <=\n', 'yellow', 'on_blue'))
+print(colored('\n => START <=\n', 'white', 'on_blue'))
 
 while True:
    try:
       modellist = open(config.get('files', 'model_list'),'r')
       for (num,value) in enumerate(modellist):
          print ' =>',(num+1),value[:-1]
-      mn = int(raw_input(colored('\n => Select C4 Model => ', 'yellow', 'on_blue')))
+      mn = int(raw_input(colored('\n => Select C4 Model => ', 'white', 'on_blue')))
       break
    except ValueError:
-      print(colored('\n => Input must be a number <=', 'yellow', 'on_red'))
+      print(colored('\n => Input must be a number <=', 'white', 'on_red'))
 model = open(config.get('files', 'model_list'), 'r').readlines()[mn-1][:-1]
 
 url ='https://www.cam4.com/{}'.format(model)
@@ -86,9 +87,9 @@ if len(state) > 0:
  vau = vau0.split('/')[0]
 
  if len(vau) > 30:
-    print(colored("\n => TRY AGAIN <=", 'yellow','on_blue'))
+    print(colored("\n => TRY AGAIN <=", 'white','on_blue'))
     time.sleep(3)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    print(colored('\n => END <=', 'white','on_blue'))
     time.sleep(1)
     sys.exit()
  else:
@@ -104,8 +105,8 @@ if len(state) > 0:
  swf = swf0.split('"')[0]
 
  print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
- print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'yellow', 'on_blue')).format(age,loc,sta,eth)
- print (colored('\n => App URL => {} <=', 'yellow', 'on_blue')).format(vau)
+ print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'white', 'on_blue')).format(age,loc,sta,eth)
+ print (colored('\n => App URL => {} <=', 'white', 'on_blue')).format(vau)
  
  hlsurl1 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(wcdn,vpu)
  hlsurl2 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(wcdn,vpu)
@@ -114,14 +115,14 @@ if len(state) > 0:
  hls_url1 = hls_url0.split("'")[0]
  hls_url2 = hls_url1.split('live/')[1]
  hls_url = hls_url2.split('/')[0]
- print (colored('\n => Play URL => {} <=', 'yellow', 'on_blue')).format(hls_url)
+ print (colored('\n => Play URL => {} <=', 'white', 'on_blue')).format(hls_url)
 
  while True:
     try:
        mode = int(raw_input(colored('\n => Mode => Exit(6)  URL(5)  YTDL(4)  SL(3)  FFMPEG(2)  RTMP(1)  FFPLAY(0) => ', 'white', 'on_green')))
        break
     except ValueError:
-       print(colored('\n => Input must be a number <=', 'yellow', 'on_red'))
+       print(colored('\n => Input must be a number <=', 'white', 'on_red'))
  if mode == 0:
     mod = 'FFPLAY'
  if mode == 1:
@@ -156,52 +157,52 @@ if len(state) > 0:
  streamlink = config.get('files', 'streamlink')
 
  if mod == 'FFPLAY':
-    print (colored('\n => FFPLAY => {} <=', 'yellow', 'on_magenta')).format(fn)
+    print (colored('\n => FFPLAY => {} <=', 'white', 'on_magenta')).format(fn)
     command = '{} -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {} * {} * {}"'.format(ffplay,hlsurl,room,loc,stime,mn)
     os.system(command)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    sys.exit()
 
  if mod == 'RTMP':
-    print (colored('\n => RTMP-REC => {} <=', 'yellow', 'on_red')).format(fn1)
+    print (colored('\n => RTMP-REC => {} <=', 'white', 'on_red')).format(fn1)
     print
     command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf1)
     os.system(command)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    sys.exit()
 
  if mod == 'FFMPEG':
-    print (colored('\n => FFMPEG-REC => {} <=', 'yellow', 'on_red')).format(fn1)
-    command = ('{} -loglevel panic -i {} -c:v copy -c:a aac -b:a 160k {}'.format(ffmpeg,hlsurl,pf1))
+    print (colored('\n => FFMPEG-REC => {} <=', 'white', 'on_red')).format(fn1)
+    command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 128k {}'.format(ffmpeg,hlsurl,pf1))
     os.system(command)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    sys.exit()
 
  if mod == 'SL':
-    print (colored('\n => SL-REC >>> {} <<<\n', 'yellow', 'on_red')).format(fn2)
-    command = ('{} hls://{} best -Q -o {}'.format(streamlink,hlsurl,pf2))
+    print (colored('\n => SL-REC >>> {} <<<\n', 'white', 'on_red')).format(fn2)
+    command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf2))
     os.system(command)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    sys.exit()
 
  if mod == 'YTDL':
-    print (colored('\n => YTDL-REC => {} <=', 'yellow', 'on_red')).format(fn3)
-    command = ('{} -i --hls-use-mpegts --no-part -q {} -o {}'.format(youtube,hlsurl,pf3))
+    print (colored('\n => YTDL-REC => {} <=', 'white', 'on_red')).format(fn3)
+    command = ('{} -i --geo-bypass --hls-use-mpegts --no-part -q --no-warnings --no-check-certificate {} -o {}'.format(youtube,hlsurl,pf3))
     os.system(command)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    sys.exit()
 
  if mod == 'URL':
-    print (colored('\n => URL => {} <=', 'yellow', 'on_green')).format(fn4)
+    print (colored('\n => URL => {} <=', 'white', 'on_green')).format(fn4)
     file=open(pf4,'wb')
     file.write(hlsurl)
     file.close()
-    raw_input(colored('\n => Press Enter to exit <=', 'yellow', 'on_blue'))
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    raw_input(colored('\n => Press Enter to exit <=', 'white', 'on_blue'))
+    sys.exit()
 
  if mod == 'EXIT':
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    print(colored('\n => END <=', 'white','on_blue'))
     time.sleep(3)
     sys.exit()
 
 else:
    print (colored('\n => Model ({}) is OFFLINE or ERROR name <=', 'white', 'on_red')).format(model)
    time.sleep(3)
-   print(colored('\n => END <=', 'yellow','on_blue'))
+   print(colored('\n => END <=', 'white','on_blue'))
    time.sleep(1)
    sys.exit()
