@@ -1,4 +1,5 @@
-# Cam4 Remote Anonymous RTMP Recorder v.1.0.8 by horacio9a for Python 2.7.14
+                        # Cam4 Remote Anonymous RTMP Recorder v.1.1.0 by horacio9a for Python 2.7.18
+# coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
 urllib3.disable_warnings()
@@ -9,10 +10,10 @@ from colorama import init, Fore, Back, Style
 from termcolor import colored
 import ConfigParser
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+config.read('config.ini')
 
 init()
-print(colored('\n => START <=', 'yellow', 'on_blue'))
+print(colored('\n => START <=', 'white', 'on_blue'))
 
 if __name__=='__main__':
    import sys
@@ -82,16 +83,16 @@ if len(state) > 0:
  vpu = vpu0.split('"')[0]
 
  print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
- print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'yellow', 'on_blue')).format(age,loc,sta,eth)
+ print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'white', 'on_blue')).format(age,loc,sta,eth)
 
  vau0 = dec.split('rtmp://')[1]
  vau = vau0.split('/')[0]
- print (colored('\n => App URL => {} <=', 'yellow', 'on_blue')).format(vau)
+ print (colored('\n => App URL => {} <=', 'white', 'on_blue')).format(vau)
 
  if len(vau) > 30:
-    print(colored('\n => TRY AGAIN <=', 'yellow','on_blue'))
+    print(colored('\n => TRY AGAIN <=', 'white','on_blue'))
     time.sleep(3)
-    print(colored('\n => END <=', 'yellow','on_blue'))
+    print(colored('\n => END <=', 'white','on_blue'))
     time.sleep(1)
     sys.exit()
  else:
@@ -99,7 +100,7 @@ if len(state) > 0:
 
  vpu0 = dec.split('videoPlayUrl":"')[1]
  vpu = vpu0.split('"')[0]
- print (colored('\n => Play URL => {} <=', 'yellow', 'on_blue')).format(vpu)
+ print (colored('\n => Play URL => {} <=', 'white', 'on_blue')).format(vpu)
 
  swf0 = dec.split('playerUrl":"')[1]
  swf = swf0.split('"')[0]
@@ -110,16 +111,15 @@ if len(state) > 0:
  rtmp = config.get('files', 'rtmpdump')
  filename = room + '_C4_' + timestamp + '.flv'
  pf = path + filename
- print (colored('\n => RTMP-REC => {} <=', 'yellow', 'on_red')).format(filename)
+ print (colored('\n => RTMP-REC => {} <=', 'white', 'on_red')).format(filename)
  print
  command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf)
  os.system(command)
- print(colored('\n => END <=', 'yellow','on_blue'))
  sys.exit()
 
 else:
    print (colored('\n => Model ({}) is OFFLINE or ERROR name <=', 'white', 'on_red')).format(model)
    time.sleep(3)
-   print(colored('\n => END <=', 'yellow','on_blue'))
+   print(colored('\n => END <=', 'white','on_blue'))
    time.sleep(1)
    sys.exit()
