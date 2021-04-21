@@ -1,4 +1,4 @@
-# Cam4 Anonymous All Modes Recorder v.1.1.0 by horacio9a for Python 2.7.18
+# Cam4 Anonymous All Modes Recorder v.1.1.1 by horacio9a for Python 2.7.18
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
@@ -23,7 +23,7 @@ while True:
       mn = int(raw_input(colored('\n => Select C4 Model => ', 'white', 'on_blue')))
       break
    except ValueError:
-      print(colored('\n => Input must be a number <=', 'white', 'on_red'))
+      print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
 model = open(config.get('files', 'model_list'), 'r').readlines()[mn-1][:-1]
 
 url ='https://www.cam4.com/{}'.format(model)
@@ -33,176 +33,219 @@ r = http.urlopen('GET',url)
 enc = (r.data)
 dec=urllib.unquote(enc).decode()
 
-state0 = dec.split("showState: '")[1]
-state = state0.split("'")[0]
-
-if len(state) > 0:
- try:
-   age0 = dec.split('Age:</')[1]
-   age1 = age0.split('</')[0]
-   age = age1.split('">')[1]
- except:
-   age = '-'
-
- try:
-   loc0 = dec.split('Location:</')[1]
-   loc1 = loc0.split('</')[0]
-   loc2 = loc1.split('">')[1]
-   loc3 = re.sub(',', '', loc2)
-   loc = re.sub(' ', '', loc3)
- except:
-   loc = '-'
-
- try:
-   sta0 = dec.split('Status:</')[1]
-   sta1 = sta0.split('</')[0]
-   sta = sta1.split('">')[1]
- except:
-   sta = '-'
-
- try:
-   room0 = dec.split('room":"')[1]
-   room = room0.split('"')[0]
- except:
-   room = '-'
-
- try:
-   ms0 = dec.split('Member since:</')[1]
-   ms1 = ms0.split('</')[0]
-   ms2 = ms1.split('">')[1]
-   ms3 = re.sub(' ', '-', ms2)
-   ms = re.sub(',', '', ms3)
- except:
-   ms = '-'
-
- try:
-   eth0 = dec.split('Ethnicity:</')[1]
-   eth1 = eth0.split('</')[0]
-   eth2 = eth1.split('">')[1]
-   eth = re.sub(' ', '', eth2)
- except:
-   eth = '-'
-
- vau0 = dec.split('rtmp://')[1]
- vau = vau0.split('/')[0]
-
- if len(vau) > 30:
-    print(colored("\n => TRY AGAIN <=", 'white','on_blue'))
-    time.sleep(3)
-    print(colored('\n => END <=', 'white','on_blue'))
-    time.sleep(1)
-    sys.exit()
- else:
-    pass
-
- vpu0 = dec.split('videoPlayUrl":"')[1]
- vpu = vpu0.split('"')[0]
-
- # room = vpu.split('-')[0]
- wcdn = vpu.split('-')[1]
-
- swf0 = dec.split('playerUrl":"')[1]
- swf = swf0.split('"')[0]
-
- print (colored('\n => Room: ({}) * State: ({}) * Member since: ({}) <=', 'white', 'on_blue')).format(room,state,ms)
- print (colored('\n => Age: ({}) * Location: ({}) * Status: ({}) * Ethnic: ({}) <=', 'white', 'on_blue')).format(age,loc,sta,eth)
- print (colored('\n => App URL => {} <=', 'white', 'on_blue')).format(vau)
- 
- hlsurl1 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/ngrp:{}_all/playlist.m3u8'.format(wcdn,vpu)
- hlsurl2 = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/amlst:{}_aac/playlist.m3u8'.format(wcdn,vpu)
- hlsurl = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/{}_aac/playlist.m3u8'.format(wcdn,vpu)
- hls_url0 = dec.split("hlsUrl: '")[1]
- hls_url1 = hls_url0.split("'")[0]
- hls_url2 = hls_url1.split('live/')[1]
- hls_url = hls_url2.split('/')[0]
- print (colored('\n => Play URL => {} <=', 'white', 'on_blue')).format(hls_url)
-
- while True:
+if 'showState' in dec:
+  status0 = dec.split("showState: '")[1]
+  status = status0.split("'")[0]
+  if len(status) > 0:
     try:
-       mode = int(raw_input(colored('\n => Mode => Exit(6)  URL(5)  YTDL(4)  SL(3)  FFMPEG(2)  RTMP(1)  FFPLAY(0) => ', 'white', 'on_green')))
-       break
-    except ValueError:
-       print(colored('\n => Input must be a number <=', 'white', 'on_red'))
- if mode == 0:
-    mod = 'FFPLAY'
- if mode == 1:
-    mod = 'RTMP'
- if mode == 2:
-    mod = 'FFMPEG'
- if mode == 3:
-    mod = 'SL'
- if mode == 4:
-    mod = 'YTDL'
- if mode == 5:
-    mod = 'URL'
- if mode == 6:
-    mod = 'EXIT'
+      gender0 = dec.split(' gender-')[1]
+      gender1 = gender0.split('" t')[0]
+      gender = gender1.split('="')[1]
+    except:
+      gender = '-'
 
- timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
- stime = str(time.strftime('%H:%M:%S'))
- path = config.get('folders', 'output_folder')
- fn = room + '_C4_' + timestamp
- fn1 = room + '_C4_' + timestamp + '.flv'
- fn2 = room + '_C4_' + timestamp + '.mp4'
- fn3 = room + '_C4_' + timestamp + '.ts'
- fn4 = room + '_C4_' + timestamp + '.txt'
- pf1 = (path + fn1)
- pf2 = (path + fn2)
- pf3 = (path + fn3)
- pf4 = (path + fn4)
- rtmp = config.get('files', 'rtmpdump')
- ffplay = config.get('files', 'ffplay')
- ffmpeg = config.get('files', 'ffmpeg')
- youtube = config.get('files', 'youtube')
- streamlink = config.get('files', 'streamlink')
+    try:
+      orientation0 = dec.split('orientation ')[1]
+      orientation1 = orientation0.split('</')[0]
+      orientation = orientation1.split('>')[1]
+    except:
+      orientation = '-'
 
- if mod == 'FFPLAY':
-    print (colored('\n => FFPLAY => {} <=', 'white', 'on_magenta')).format(fn)
-    command = '{} -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {} * {} * {}"'.format(ffplay,hlsurl,room,loc,stime,mn)
-    os.system(command)
-    sys.exit()
+    try:
+      country0 = dec.split('"country"')[1]
+      country1 = country0.split('" t')[0]
+      country = country1.split('t="')[1]
+    except:
+      country = '-'
 
- if mod == 'RTMP':
-    print (colored('\n => RTMP-REC => {} <=', 'white', 'on_red')).format(fn1)
+    try:
+      age0 = dec.split('Age:</')[1]
+      age1 = age0.split('</')[0]
+      age = age1.split('">')[1]
+    except:
+      age = '-'
+
+    try:
+      loc0 = dec.split('Location:</')[1]
+      loc1 = loc0.split('</')[0]
+      loc2 = loc1.split('">')[1]
+      loc3 = re.sub(',', '', loc2)
+      loc = re.sub(' ', '', loc3)
+    except:
+      loc = '-'
+
+    try:
+      sta0 = dec.split('Status:</')[1]
+      sta1 = sta0.split('</')[0]
+      sta = sta1.split('">')[1]
+    except:
+      sta = '-'
+
+    try:
+      room0 = dec.split('room":"')[1]
+      room = room0.split('"')[0]
+    except:
+      room = '-'
+
+    try:
+      ms0 = dec.split('Member since:</')[1]
+      ms1 = ms0.split('</')[0]
+      ms2 = ms1.split('">')[1]
+      ms3 = re.sub(' ', '-', ms2)
+      ms = re.sub(',', '', ms3)
+    except:
+      ms = '-'
+
+    try:
+      eth0 = dec.split('Ethnicity:</')[1]
+      eth1 = eth0.split('</')[0]
+      eth2 = eth1.split('">')[1]
+      eth = re.sub(' ', '', eth2)
+    except:
+      eth = '-'
+
+    vau0 = dec.split('rtmp://')[1]
+    vau = vau0.split('/')[0]
+
+    if len(vau) > 30:
+       print(colored("\n => TRY AGAIN <=", 'white','on_blue'))
+       time.sleep(3)
+       print(colored('\n => END <=', 'white','on_blue'))
+       time.sleep(1)
+       sys.exit()
+    else:
+       pass
+
+    vpu0 = dec.split('videoPlayUrl":"')[1]
+    vpu = vpu0.split('"')[0]
+
+    wcdn = vpu.split('-')[1]
+
+    swf0 = dec.split('playerUrl":"')[1]
+    swf = swf0.split('"')[0]
+
+    print (colored('\n => Room: ({}) * Member since: ({}) * Room status: ({}) <=', 'white', 'on_blue')).format(room,ms,status)
+    print (colored('\n => Age: ({}) * Gender: ({}) * Orientation: ({}) * Status: ({}) <=', 'white', 'on_blue')).format(age,gender,orientation,sta)
+    print (colored('\n => Country: ({}) * Location: ({}) * Ethnic: ({}) <=', 'white', 'on_blue')).format(country,loc,eth)
+ 
+    hlsurl = 'https://cam4-hls.xcdnpro.com/{}/cam4-origin-live/{}_aac/playlist.m3u8'.format(wcdn,vpu)
+ 
+    while True:
+       try:
+          mode = int(raw_input(colored('\n => Mode => Exit(6)  URL(5)  YTDL(4)  SL(3)  FFMPEG(2)  RTMP(1)  FFPLAY(0) => ', 'white', 'on_green')))
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=', 'white', 'on_red'))
+    if mode > 6:
+       print
+       print(colored(' => Too big number <=', 'white', 'on_red'))
+       mod = 'EXIT'
+    if mode == 0:
+       mod = 'FFPLAY'
+    if mode == 1:
+       mod = 'RTMP'
+    if mode == 2:
+       mod = 'FFMPEG'
+    if mode == 3:
+       mod = 'SL'
+    if mode == 4:
+       mod = 'YTDL'
+    if mode == 5:
+       mod = 'URL'
+    if mode == 6:
+       mod = 'EXIT'
+
+    timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
+    stime = str(time.strftime('%H:%M:%S'))
+    path = config.get('folders', 'output_folder')
+    fn = room + '_C4_' + timestamp
+    fn1 = room + '_C4_' + timestamp + '.flv'
+    fn2 = room + '_C4_' + timestamp + '.mp4'
+    fn3 = room + '_C4_' + timestamp + '.ts'
+    fn4 = room + '_C4_' + timestamp + '.txt'
+    pf1 = (path + fn1)
+    pf2 = (path + fn2)
+    pf3 = (path + fn3)
+    pf4 = (path + fn4)
+    rtmp = config.get('files', 'rtmpdump')
+    ffplay = config.get('files', 'ffplay')
+    ffmpeg = config.get('files', 'ffmpeg')
+    youtube = config.get('files', 'youtube')
+    streamlink = config.get('files', 'streamlink')
+
+    if mod == 'FFPLAY':
+       print (colored('\n => FFPLAY => {} <=', 'white', 'on_magenta')).format(fn)
+       command = '{} -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {}"'.format(ffplay,hlsurl,fn,mn)
+       os.system(command)
+       while True:
+          try:
+             prog = int(raw_input(colored(' => Mode => URL(5) => YTDL(4) => SL(3) => FFMPEG(2) => RTMP(1) => Exit(0) => ', 'white', 'on_blue')))
+             break
+          except ValueError:
+             print
+             print(colored(' => Input must be a number <=\n', 'white', 'on_red'))
+       if prog > 5:
+          print
+          print(colored(' => Too big number <=', 'white', 'on_red'))
+          mod = 'EXIT'
+       if prog == 0:
+          mod = 'EXIT'
+       if prog == 1:
+          mod = 'RTMP'
+       if prog == 2:
+          mod = 'FFMPEG'
+       if prog == 3:
+          mod = 'SL'
+       if prog == 4:
+          mod = 'YTDL'
+       if prog == 5:
+          mod = 'URL'
+
+    if mod == 'RTMP':
+       print (colored('\n => RTMP-REC => {} <=', 'white', 'on_red')).format(fn1)
+       print
+       command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf1)
+       os.system(command)
+       sys.exit()
+
+    if mod == 'FFMPEG':
+       print (colored('\n => FFMPEG-REC => {} <=', 'white', 'on_red')).format(fn1)
+       command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 128k {}'.format(ffmpeg,hlsurl,pf1))
+       os.system(command)
+       sys.exit()
+
+    if mod == 'SL':
+       print (colored('\n => SL-REC >>> {} <<<\n', 'white', 'on_red')).format(fn2)
+       command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf2))
+       os.system(command)
+       sys.exit()
+
+    if mod == 'YTDL':
+       print (colored('\n => YTDL-REC => {} <=', 'white', 'on_red')).format(fn3)
+       command = ('{} -i --geo-bypass --hls-use-mpegts --no-part -q --no-warnings --no-check-certificate {} -o {}'.format(youtube,hlsurl,pf3))
+       os.system(command)
+       sys.exit()
+
+    if mod == 'URL':
+       print (colored('\n => URL => {} <=', 'white', 'on_green')).format(fn4)
+       file=open(pf4,'wb')
+       file.write(hlsurl)
+       file.close()
+       raw_input(colored('\n => Press Enter to exit <=', 'white', 'on_blue'))
+       sys.exit()
+
+    if mod == 'EXIT':
+       print(colored('\n => END <=', 'white','on_blue'))
+       sys.exit()
+
+  else:
+    print(colored('\n => Model is offline <=', 'white','on_red'))
     print
-    command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf1)
-    os.system(command)
-    sys.exit()
-
- if mod == 'FFMPEG':
-    print (colored('\n => FFMPEG-REC => {} <=', 'white', 'on_red')).format(fn1)
-    command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 128k {}'.format(ffmpeg,hlsurl,pf1))
-    os.system(command)
-    sys.exit()
-
- if mod == 'SL':
-    print (colored('\n => SL-REC >>> {} <<<\n', 'white', 'on_red')).format(fn2)
-    command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf2))
-    os.system(command)
-    sys.exit()
-
- if mod == 'YTDL':
-    print (colored('\n => YTDL-REC => {} <=', 'white', 'on_red')).format(fn3)
-    command = ('{} -i --geo-bypass --hls-use-mpegts --no-part -q --no-warnings --no-check-certificate {} -o {}'.format(youtube,hlsurl,pf3))
-    os.system(command)
-    sys.exit()
-
- if mod == 'URL':
-    print (colored('\n => URL => {} <=', 'white', 'on_green')).format(fn4)
-    file=open(pf4,'wb')
-    file.write(hlsurl)
-    file.close()
-    raw_input(colored('\n => Press Enter to exit <=', 'white', 'on_blue'))
-    sys.exit()
-
- if mod == 'EXIT':
-    print(colored('\n => END <=', 'white','on_blue'))
-    time.sleep(3)
+    print(colored(' => END <=', 'white','on_blue'))
     sys.exit()
 
 else:
-   print (colored('\n => Model ({}) is OFFLINE or ERROR name <=', 'white', 'on_red')).format(model)
-   time.sleep(3)
-   print(colored('\n => END <=', 'white','on_blue'))
-   time.sleep(1)
+   print(colored('\n => Page Not Found <=', 'white','on_red'))
+   print
+   print(colored(' => END <=', 'white','on_blue'))
    sys.exit()
