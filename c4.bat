@@ -3,15 +3,18 @@ SETLOCAL EnableDelayedExpansion
 :START
 CLS
 ECHO.
-SET /P MODE=EXIT(6)  START(5)  C4YTR(4)  C4SLR(3)  C4FFR(2)  C4RR(1)  C4(0)(ENTER)(%MODE%): 
+CLS && ECHO #######################################################################
+ECHO ###   C A M 4   A N O N Y M O U S   P Y T H O N   2   S C R I P T   ###
+ECHO #######################################################################
+ECHO.
+SET /P MODE=EXIT(5)  C4YTR(4)  C4SLR(3)  C4FFR(2)  C4RR(1)  C4(0)(ENTER)(%MODE%): 
 IF "%MODE%"=="" GOTO C4
 IF "%MODE%"=="0" GOTO C4
 IF "%MODE%"=="1" GOTO C4RR
 IF "%MODE%"=="2" GOTO C4FFR
 IF "%MODE%"=="3" GOTO C4SLR
 IF "%MODE%"=="4" GOTO C4YTR
-IF "%MODE%"=="5" GOTO START
-IF "%MODE%"=="6" GOTO EXIT
+IF "%MODE%"=="5" GOTO EXIT
 :C4
 ECHO.
 CLS && ECHO #################################################
@@ -20,7 +23,7 @@ ECHO #################################################
 cd C:/
 COLOR 0F
 cd -c4-py
-start python c4.py
+python c4.py
 ECHO.
 PAUSE
 GOTO START
