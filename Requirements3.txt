@@ -1,0 +1,8 @@
+urllib3==1.26.3
+DateTime==4.3
+requests==2.25.1
+Command==0.1.0
+colorama==0.4.4
+termcolor==1.1.0
+configparser==5.0.1
+streamlink==2.1.0
