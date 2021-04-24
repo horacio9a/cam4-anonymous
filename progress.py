@@ -6,7 +6,7 @@ from time import time
 from streamlink_cli.compat import is_win32
 
 PROGRESS_FORMATS = (
-    "[download] >>> {prefix}  ({written} @ {speed}/s) ",
+    "[download] => {prefix}  ({written} @ {speed}/s) ",
 )
 
 # widths generated from
