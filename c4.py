@@ -179,11 +179,11 @@ if 'showState' in dec:
        os.system(command)
        while True:
           try:
-             prog = int(raw_input(colored(' => Mode => URL(5) => YTDL(4) => SL(3) => FFMPEG(2) => RTMP(1) => Exit(0) => ', 'white', 'on_blue')))
+             prog = int(raw_input(colored('\n => Mode => URL(5) => YTDL(4) => SL(3) => FFMPEG(2) => RTMP(1) => Exit(0) => ', 'white', 'on_blue')))
              break
           except ValueError:
              print
-             print(colored(' => Input must be a number <=\n', 'white', 'on_red'))
+             print(colored(' => Input must be a number <=', 'white', 'on_red'))
        if prog > 5:
           print
           print(colored(' => Too big number <=', 'white', 'on_red'))
@@ -203,8 +203,7 @@ if 'showState' in dec:
 
     if mod == 'RTMP':
        print (colored('\n => RTMP-REC => {} <=', 'white', 'on_red')).format(fn1)
-       print
-       command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf1)
+       command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}" -q'.format(rtmp,vau,swf,vpu,pf1)
        os.system(command)
        sys.exit()
 
@@ -215,7 +214,7 @@ if 'showState' in dec:
        sys.exit()
 
     if mod == 'SL':
-       print (colored('\n => SL-REC >>> {} <<<\n', 'white', 'on_red')).format(fn2)
+       print (colored('\n => SL-REC => {} ', 'white', 'on_red')).format(fn2)
        command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf2))
        os.system(command)
        sys.exit()
