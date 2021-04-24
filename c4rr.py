@@ -129,7 +129,7 @@ if 'showState' in dec:
     pf = path + filename
     print (colored('\n => RTMP-REC => {} <=', 'white', 'on_red')).format(filename)
     print
-    command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}"'.format(rtmp,vau,swf,vpu,pf)
+    command = '{} -r"rtmp://{}/cam4-edge-live" -a"cam4-edge-live" -W"{}" --live -y"{}" -o"{}" -q'.format(rtmp,vau,swf,vpu,pf)
     os.system(command)
     sys.exit()
 
