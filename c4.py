@@ -26,12 +26,11 @@ while True:
       print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
 model = open(config.get('files', 'model_list'), 'r').readlines()[mn-1][:-1]
 
-url ='https://www.cam4.com/{}'.format(model)
-user_agent = {'user-agent': 'Mozilla/5.0 (Android; Mobile; rv:14.0) ..'}
-http = urllib3.PoolManager(10, headers=user_agent)
-r = http.urlopen('GET',url)
+url ='https://www.cam4.com/{}/'.format(model)
+manager = PoolManager(10)
+r = manager.request('GET', url)
 enc = (r.data)
-dec=urllib.unquote(enc).decode()
+dec=urllib.unquote(enc)
 
 if 'showState' in dec:
   status0 = dec.split("showState: '")[1]
