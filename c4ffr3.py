@@ -50,3 +50,9 @@ if 'canUseCDN":true' in dec:
 
     else:
       sys.exit()
+
+else:
+   print(colored(' => Model is offline or wrong name <=', 'white','on_red'))
+   print()
+   print(colored(' => END <=', 'white','on_blue'))
+   sys.exit()
