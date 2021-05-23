@@ -7,7 +7,7 @@ CLS && ECHO ####################################################################
 ECHO ###    C A M 4    A N O N Y M O U S    P Y T H O N    2    S C R I P T    ###
 ECHO #############################################################################
 ECHO.
-SET /P MODE=EXIT(6) C4YTR(5) C4SLR(4) C4FFR(3) C4(2) GETOW(1) GETOA(0)(ENTER)(%MODE%): 
+SET /P MODE=EXIT(6) - C4YTR(5) - C4SLR(4) - C4FFR(3) - C4(2) -  GETOW(1) - GETOA(0)(ENTER)(%MODE%): 
 IF "%MODE%"=="" GOTO GETOA
 IF "%MODE%"=="0" GOTO GETOA
 IF "%MODE%"=="1" GOTO GETOW
