@@ -283,7 +283,7 @@ if 'canUseCDN":true' in dec:
 
       while True:
          try:
-            mode = int(raw_input(colored(' => Mode => Exit(5) - URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => ', 'white', 'on_blue')))
+            mode = int(raw_input(colored(' => Mode => Exit(5) - URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => ', 'white', 'on_green')))
             break
          except ValueError:
             print
@@ -329,7 +329,7 @@ if 'canUseCDN":true' in dec:
          os.system(command)
          while True:
             try:
-               prog = int(raw_input(colored(' => Mode => URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - Exit(0) => ', 'white', 'on_blue')))
+               prog = int(raw_input(colored(' => Mode => URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - Exit(0) => ', 'white', 'on_green')))
                break
             except ValueError:
                print
