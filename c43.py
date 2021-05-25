@@ -1,7 +1,7 @@
-# Cam4 Anonymous All Modes Recorder v.2.0.0 by horacio9a for Python 3.9.1
+# Cam4 Anonymous All Modes Recorder v.2.0.1 by horacio9a for Python 3.9.1
 # coding: utf-8
 
-import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command
+import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command, livestreamer, streamlink
 urllib3.disable_warnings()
 from urllib3 import PoolManager
 from urllib.parse import quote
@@ -10,7 +10,7 @@ from colorama import init, Fore, Back, Style
 from termcolor import colored
 import configparser
 Config = configparser.ConfigParser()
-Config.read('config.ini')
+Config.read('config3.ini')
 
 init()
 print()
@@ -283,12 +283,12 @@ if 'canUseCDN":true' in dec:
 
       while True:
          try:
-            mode = int(input(' => Mode => Exit(5) - URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => '))
+            mode = int(input(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => '))
             break
          except ValueError:
             print()
             print(colored(' => Input must be a number <=', 'white', 'on_red'))
-      if mode > 5:
+      if mode > 6:
          print()
          print(colored(' => Too big number <=', 'white', 'on_red'))
          mod = 'EXIT'
@@ -299,10 +299,12 @@ if 'canUseCDN":true' in dec:
       if mode == 2:
          mod = 'SL'
       if mode == 3:
-         mod = 'YTDL'
+         mod = 'LS'
       if mode == 4:
-         mod = 'URL'
+         mod = 'YTDL'
       if mode == 5:
+         mod = 'URL'
+      if mode == 6:
          mod = 'EXIT'
 
       timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
@@ -321,6 +323,7 @@ if 'canUseCDN":true' in dec:
       ffmpeg = Config.get('files', 'ffmpeg')
       youtube = Config.get('files', 'youtube')
       streamlink = Config.get('files', 'streamlink')
+      livestreamer = Config.get('files', 'livestreamer')
 
       if mod == 'FFPLAY':
          print()
@@ -329,12 +332,12 @@ if 'canUseCDN":true' in dec:
          os.system(command)
          while True:
             try:
-               prog = int(input(' => Mode => URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - Exit(0) => '))
+               prog = int(input(' => Mode => URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - Exit(0) => '))
                break
             except ValueError:
                print()
                print(colored(' => Input must be a number <=', 'white', 'on_red'))
-         if prog > 4:
+         if prog > 5:
             print()
             print(colored(' => Too big number <=', 'white', 'on_red'))
             mod = 'EXIT'
@@ -345,8 +348,10 @@ if 'canUseCDN":true' in dec:
          if prog == 2:
             mod = 'SL'
          if prog == 3:
-            mod = 'YTDL'
+            mod = 'LS'
          if prog == 4:
+            mod = 'YTDL'
+         if prog == 5:
             mod = 'URL'
 
       if mod == 'FFMPEG':
@@ -361,6 +366,16 @@ if 'canUseCDN":true' in dec:
          print ((colored(' => SL-REC => {}  (  Size  @   Speed   ) <=', 'white', 'on_red')).format(fn2))
          print()
          command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf2))
+         os.system(command)
+         print()
+         print(colored(' => END <= ', 'white','on_blue'))
+         sys.exit()
+
+      if mod == 'LS':
+         print()
+         print ((colored(' => LS-REC => {}  (  Size  @   Speed   ) <=', 'white', 'on_red')).format(fn2))
+         print()
+         command = ('{} hlsvariant://{} best -Q -o {}'.format(livestreamer,hlsurl,pf2))
          os.system(command)
          print()
          print(colored(' => END <= ', 'white','on_blue'))
