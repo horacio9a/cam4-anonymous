@@ -1,8 +1,7 @@
-# Cam4 Anonymous Get Online All Models v.2.0.0 by horacio9a for Python 3.9.1
+# Cam4 Anonymous Get Online All Models v.2.0.1 by horacio9a for Python 3.9.1
 # coding: utf-8
 
 import sys, os, urllib, ssl, re, json, gevent, requests
-from sys import exit
 offline = False
 
 def getOnlineUsers(page):
@@ -18,7 +17,7 @@ def getOnlineUsers(page):
         except gevent.Timeout:
             attempt = attempt + 1
             if attempt > 1:
-                exit(0)
+                sys.exit()
 			
 if __name__ == '__main__':
     while True:
@@ -36,4 +35,4 @@ if __name__ == '__main__':
             online_all_model_list = username.lower()
             print(online_all_model_list)
         if attempt > 3:
-            exit(0)
+            sys.exit()
