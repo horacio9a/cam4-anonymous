@@ -1,4 +1,4 @@
-# Cam4 Anonymous All Modes Recorder v.2.0.0 by horacio9a for Python 2.7.18
+# Cam4 Anonymous All Modes Recorder v.2.0.1 by horacio9a for Python 2.7.18
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command
@@ -53,7 +53,7 @@ if mod == 'C4W':
      except ValueError:
         print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
   model = open(Config.get('files', 'wanted_model_list'), 'r').readlines()[mn-1][:-1]
-  print ((colored(' => Selected C4 Wanted Model => {} <=', 'white', 'on_blue')).format(model))
+  print (colored(' => Selected C4 Wanted Model => {} <=', 'white', 'on_blue')).format(model)
   print
 
 if mod == 'C4OW':
@@ -75,7 +75,7 @@ if mod == 'C4OW':
      except ValueError:
         print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
   model = open(Config.get('files', 'online_wanted_model_list'), 'r').readlines()[mn-1][:-1]
-  print ((colored(' => Selected C4 Online Wanted Model => {} <=', 'white', 'on_blue')).format(model))
+  print (colored(' => Selected C4 Online Wanted Model => {} <=', 'white', 'on_blue')).format(model)
   print
 
 if mod == 'C4OA':
@@ -124,7 +124,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 
   if oa == 'OA1000':
@@ -148,7 +148,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 
   if oa == 'OA1500':
@@ -172,7 +172,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 
   if oa == 'OA2000':
@@ -196,7 +196,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 
   if oa == 'OA2500':
@@ -220,7 +220,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 
   if oa == 'OA3000':
@@ -244,7 +244,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 
   if oa == 'OA3500':
@@ -262,7 +262,7 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
     print
 	
 url ='https://www.cam4.com/rest/v1.0/profile/{}/streamInfo'.format(model)
@@ -283,12 +283,12 @@ if 'canUseCDN":true' in dec:
 
       while True:
          try:
-            mode = int(raw_input(colored(' => Mode => Exit(5) - URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => ', 'white', 'on_green')))
+            mode = int(raw_input(colored(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => ', 'white', 'on_green')))
             break
          except ValueError:
             print
             print(colored(' => Input must be a number <=', 'white', 'on_red'))
-      if mode > 5:
+      if mode > 6:
          print
          print(colored(' => Too big number <=', 'white', 'on_red'))
          mod = 'EXIT'
@@ -299,10 +299,12 @@ if 'canUseCDN":true' in dec:
       if mode == 2:
          mod = 'SL'
       if mode == 3:
-         mod = 'YTDL'
+         mod = 'LS'
       if mode == 4:
-         mod = 'URL'
+         mod = 'YTDL'
       if mode == 5:
+         mod = 'URL'
+      if mode == 6:
          mod = 'EXIT'
 
       timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
@@ -321,20 +323,21 @@ if 'canUseCDN":true' in dec:
       ffmpeg = Config.get('files', 'ffmpeg')
       youtube = Config.get('files', 'youtube')
       streamlink = Config.get('files', 'streamlink')
+      livestreamer = Config.get('files', 'livestreamer')
 
       if mod == 'FFPLAY':
          print
-         print ((colored(' => FFPLAY => {} <=', 'white', 'on_magenta')).format(fn))
+         print (colored(' => FFPLAY => {} <=', 'white', 'on_magenta')).format(fn)
          command = '{} -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {}"'.format(ffplay,hlsurl,fn,mn)
          os.system(command)
          while True:
             try:
-               prog = int(raw_input(colored(' => Mode => URL(4) - YTDL(3) - SL(2) - FFMPEG(1) - Exit(0) => ', 'white', 'on_green')))
+               prog = int(raw_input(colored(' => Mode => URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - Exit(0) => ', 'white', 'on_green')))
                break
             except ValueError:
                print
                print(colored(' => Input must be a number <=', 'white', 'on_red'))
-         if prog > 4:
+         if prog > 5:
             print
             print(colored(' => Too big number <=', 'white', 'on_red'))
             mod = 'EXIT'
@@ -345,20 +348,22 @@ if 'canUseCDN":true' in dec:
          if prog == 2:
             mod = 'SL'
          if prog == 3:
-            mod = 'YTDL'
+            mod = 'LS'
          if prog == 4:
+            mod = 'YTDL'
+         if prog == 5:
             mod = 'URL'
 
       if mod == 'FFMPEG':
          print
-         print ((colored(' => FFMPEG-REC => {} <=', 'white', 'on_red')).format(fn1))
+         print (colored(' => FFMPEG-REC => {} <=', 'white', 'on_red')).format(fn1)
          command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 128k {}'.format(ffmpeg,hlsurl,pf1))
          os.system(command)
          sys.exit()
 
       if mod == 'SL':
          print
-         print ((colored(' => SL-REC => {}  (  Size  @   Speed   ) <=', 'white', 'on_red')).format(fn2))
+         print (colored(' => SL-REC => {}  (  Size  @   Speed   ) <=', 'white', 'on_red')).format(fn2)
          print
          command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf2))
          os.system(command)
@@ -366,9 +371,19 @@ if 'canUseCDN":true' in dec:
          print(colored(' => END <= ', 'white','on_blue'))
          sys.exit()
 
+      if mod == 'LS':
+         print
+         print (colored(' => LS-REC => {}  (  Size  @   Speed   ) <=', 'white', 'on_red')).format(fn2)
+         print
+         command = ('{} hlsvariant://{} best -Q -o {}'.format(livestreamer,hlsurl,pf2))
+         os.system(command)
+         print
+         print(colored(' => END <= ', 'white','on_blue'))
+         sys.exit()
+
       if mod == 'YTDL':
          print
-         print ((colored(' => YTDL-REC => {} <=', 'white', 'on_red')).format(fn3))
+         print (colored(' => YTDL-REC => {} <=', 'white', 'on_red')).format(fn3)
          command = ('{} -i --geo-bypass --hls-use-mpegts --no-part -q --no-warnings --no-check-certificate {} -o {}'.format(youtube,hlsurl,pf3))
          os.system(command)
          print
@@ -377,7 +392,7 @@ if 'canUseCDN":true' in dec:
 
       if mod == 'URL':
          print
-         print((colored(' => URL => {} <=', 'white', 'on_green')).format(fn4))
+         print (colored(' => URL => {} <=', 'white', 'on_green')).format(fn4)
          file=open(pf4,'w')
          file.write(hlsurl)
          file.close()
