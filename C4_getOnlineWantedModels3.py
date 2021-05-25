@@ -1,9 +1,9 @@
-# Cam4 Anonymous Get Online Wanted Models v.2.0.0 by horacio9a for Python 3.9.1
+# Cam4 Anonymous Get Online Wanted Models v.2.0.1 by horacio9a for Python 3.9.1
 # coding: utf-8
 
 import sys, os, ssl, configparser
 Config = configparser.ConfigParser()
-Config.read('config.ini')
+Config.read('config3.ini')
 
 wanted_model_list = open(Config.get('files', 'wanted_model_list'),'r')
 online_all_model_list = open(Config.get('files', 'online_all_model_list'),'r')
