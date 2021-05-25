@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous STREAMLINK Recorder v.2.0.0 by horacio9a for Python 2.7.18
+# Cam4 Remote Anonymous STREAMLINK Recorder v.2.0.1 by horacio9a for Python 2.7.18
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command
