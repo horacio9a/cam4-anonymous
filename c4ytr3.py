@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous YTDL Recorder v.2.0.0 by horacio9a for Python 3.9.1
+# Cam4 Remote Anonymous YTDL Recorder v.2.0.1 by horacio9a for Python 3.9.1
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, command
@@ -10,7 +10,7 @@ from colorama import init, Fore, Back, Style
 from termcolor import colored
 import configparser
 Config = configparser.ConfigParser()
-Config.read('config.ini')
+Config.read('config3.ini')
 
 init()
 print()
@@ -50,3 +50,9 @@ if 'canUseCDN":true' in dec:
 
     else:
       sys.exit()
+
+else:
+   print(colored(' => Model is offline or wrong name <=', 'white','on_red'))
+   print()
+   print(colored(' => END <=', 'white','on_blue'))
+   sys.exit()
