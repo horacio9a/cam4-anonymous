@@ -1,4 +1,4 @@
-# Cam4 Anonymous All Modes Recorder v.2.0.1 by horacio9a for Python 3.9.1
+# Cam4 Anonymous All Modes Recorder v.2.0.2 by horacio9a for Python 3.9.1
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command, livestreamer, streamlink
@@ -283,7 +283,7 @@ if 'canUseCDN":true' in dec:
 
       while True:
          try:
-            mode = int(input(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - FFPLAY(0) => '))
+            mode = int(input(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - PLAYER(0) => '))
             break
          except ValueError:
             print()
@@ -293,7 +293,7 @@ if 'canUseCDN":true' in dec:
          print(colored(' => Too big number <=', 'white', 'on_red'))
          mod = 'EXIT'
       if mode == 0:
-         mod = 'FFPLAY'
+         mod = 'PLAYER'
       if mode == 1:
          mod = 'FFMPEG'
       if mode == 2:
@@ -319,19 +319,21 @@ if 'canUseCDN":true' in dec:
       pf2 = (path + fn2)
       pf3 = (path + fn3)
       pf4 = (path + fn4)
-      ffplay = Config.get('files', 'ffplay')
+      player = Config.get('files', 'player')
       ffmpeg = Config.get('files', 'ffmpeg')
       youtube = Config.get('files', 'youtube')
       streamlink = Config.get('files', 'streamlink')
       livestreamer = Config.get('files', 'livestreamer')
 
-      if mod == 'FFPLAY':
+      if mod == 'PLAYER':
          print()
-         print ((colored(' => FFPLAY => {} <=', 'white', 'on_magenta')).format(fn))
-         command = '{} -loglevel panic -i {} -infbuf -autoexit -x 640 -y 480 -window_title "{} * {}"'.format(ffplay,hlsurl,fn,mn)
+         print ((colored(' => PLAYER => {} <=', 'white', 'on_magenta')).format(fn))
+         print()
+         command = ('{} -p {} {} best'.format(streamlink, player, hlsurl))
          os.system(command)
          while True:
             try:
+               print()
                prog = int(input(' => Mode => URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - Exit(0) => '))
                break
             except ValueError:
