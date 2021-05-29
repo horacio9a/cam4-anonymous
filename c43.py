@@ -19,7 +19,7 @@ print()
 
 while True:
    try:
-      mode = int(input(' => Select => C4_Online_All(2) - C4_Online_Wanted(1) - C4_Wanted(0) => '))
+      mode = int(input(colored(' => Select => C4_Online_All(2) - C4_Online_Wanted(1) - C4_Wanted(0) => ', 'white', 'on_blue')))
       print()
       break
    except ValueError:
@@ -41,7 +41,7 @@ if mod == 'C4W':
         for (num,value) in enumerate(modellist):
            print(' =>',(num+1),value[:-1])
         print()
-        mn = int(input(' => Select C4 Wanted Model => '))
+        mn = int(input(colored(' => Select C4 Wanted Model => ', 'white', 'on_blue')))
         print()
         nr_lines = sum(1 for line in open(Config.get('files', 'wanted_model_list')))
         if mn > nr_lines:
@@ -63,7 +63,7 @@ if mod == 'C4OW':
         for (num,value) in enumerate(modellist):
            print(' =>',(num+1),value[:-1])
         print()
-        mn = int(input(' => Select C4 Online Wanted Model => '))
+        mn = int(input(colored(' => Select C4 Online Wanted Model => ', 'white', 'on_blue')))
         print()
         nr_lines = sum(1 for line in open(Config.get('files', 'online_wanted_model_list')))
         if mn > nr_lines:
@@ -81,7 +81,7 @@ if mod == 'C4OW':
 if mod == 'C4OA':
   while True:
      try:
-        c4oa = int(input(' => Select => <500(0) <1000(1) <1500(2) <2000(3) <2500(4) <3000(5) <3500(6) => '))
+        c4oa = int(input(colored(' => Select => <500(0) <1000(1) <1500(2) <2000(3) <2500(4) <3000(5) <3500(6) => ', 'white', 'on_blue')))
         print()
         break
      except ValueError:
@@ -112,7 +112,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Models => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -136,7 +136,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Model => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -160,7 +160,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Model => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -184,7 +184,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Model => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -208,7 +208,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Model => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -232,7 +232,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Model => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -256,7 +256,7 @@ if mod == 'C4OA':
               break
             print(' =>',(num+1),value[:-1])
           print()
-          mn = int(input(' => Select C4 Online All Model => '))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print()
           break
        except ValueError:
@@ -283,7 +283,7 @@ if 'canUseCDN":true' in dec:
 
       while True:
          try:
-            mode = int(input(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - PLAYER(0) => '))
+            mode = int(input(colored(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - PLAYER(0) => ', 'white', 'on_green')))
             break
          except ValueError:
             print()
@@ -334,7 +334,7 @@ if 'canUseCDN":true' in dec:
          while True:
             try:
                print()
-               prog = int(input(' => Mode => URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - Exit(0) => '))
+               prog = int(input(colored(' => Mode => URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - Exit(0) => ', 'white', 'on_green')))
                break
             except ValueError:
                print()
