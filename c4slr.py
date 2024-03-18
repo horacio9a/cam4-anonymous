@@ -1,4 +1,4 @@
-# Cam4 Remote Anonymous STREAMLINK Recorder v.2.0.1 by horacio9a for Python 2.7.18
+# Cam4 Remote Anonymous STREAMLINK Recorder v.2.1.0 by horacio9a for Python 2.7.18
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command
@@ -11,6 +11,7 @@ from termcolor import colored
 import configparser
 Config = configparser.ConfigParser()
 Config.read('config.ini')
+country_domain = Config.get('settings', 'country_domain')
 
 init()
 print
@@ -21,36 +22,27 @@ if __name__=='__main__':
    import sys
 model = sys.argv[1]
 
-url ='https://www.cam4.com/rest/v1.0/profile/{}/streamInfo'.format(model)
+url ='https://{}.cam4.com/rest/v1.0/profile/{}/streamInfo'.format(country_domain, model)
 manager = PoolManager(10)
 r = manager.request('GET', url)
 enc = (r.data)
 dec=urllib.unquote(enc)
 
-if 'canUseCDN":true' in dec:
-    hlsurl0 = dec.split('cdnURL":"')[1]
-    hlsurl = hlsurl0.split('"')[0]
-    if len(hlsurl) > 0:
-      try:
-        streamName0 = dec.split('streamName":"')[1]
-        streamName = streamName0.split('-')[0]
-      except:
-        sys.exit()
+if len(dec) > 0:
+    hlsur2 = dec.split('cdnURL":"')[1]
+    hlsurl = hlsur2.split('"')[0]
 
-      timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
-      stime = str(time.strftime('%H:%M:%S'))
-      path = Config.get('folders', 'output_folder')
-      streamlink = Config.get('files', 'streamlink')
-      filename = streamName + '_C4_' + timestamp + '.mp4'
-      pf = path + filename
-      print (colored(' => SL-REC => {}  (  Size  @   Speed   )', 'white', 'on_red')).format(filename)
-      print
-      command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf))
-      os.system(command)
-      sys.exit()
-
-    else:
-      sys.exit()
+    timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
+    stime = str(time.strftime('%H:%M:%S'))
+    path = Config.get('folders', 'output_folder')
+    streamlink = Config.get('files', 'streamlink')
+    filename = model + '_C4_' + timestamp + '.mp4'
+    pf = path + filename
+    print (colored(' => SL-REC => {}  (  Size  @   Speed   )', 'white', 'on_red')).format(filename)
+    print
+    command = ('{} hls://{} best -Q --hls-live-edge 1 --hls-playlist-reload-attempts 9 --hls-segment-threads 3 --hls-segment-timeout 5.0 --hls-timeout 20.0 -o {}'.format(streamlink,hlsurl,pf))
+    os.system(command)
+    sys.exit()
 
 else:
    print(colored(' => Model is offline or wrong name <=', 'white','on_red'))
