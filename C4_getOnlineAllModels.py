@@ -5,7 +5,7 @@ import sys, os, urllib, ssl, re, json, requests
 offline = False
 import configparser
 Config = configparser.ConfigParser()
-Config.read('config3.ini')
+Config.read('config.ini')
 country_domain = Config.get('settings', 'country_domain')
 
 def getOnlineUsers(page):
