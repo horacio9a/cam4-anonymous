@@ -1,10 +1,8 @@
-urllib3==1.26.5
-DateTime==4.3
-requests==2.25.1
+urllib3==2.2.1
+DateTime==5.4
+requests==2.31.0
 Command==0.1.0
-colorama==0.4.4
-termcolor==1.1.0
-configparser==5.0.1
-gevent==21.1.2
-livestreamer==1.12.2
-streamlink==2.1.1
+colorama==0.4.6
+termcolor==2.4.0
+configparser==6.0.1
+streamlink==6.7.0
