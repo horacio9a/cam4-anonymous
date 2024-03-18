@@ -7,7 +7,7 @@ CLS && ECHO ####################################################################
 ECHO ###    C A M 4    A N O N Y M O U S    P Y T H O N    2    S C R I P T    ###
 ECHO #############################################################################
 ECHO.
-SET /P MODE=EXIT(7) - C4YTR(6) - C4SLR(5) - C4SLR(4) - C4FFR(3) - C4(2) -  GETOW(1) - GETOA(0)(ENTER)(%MODE%): 
+SET /P MODE=EXIT(7) - C4YTR(6) - C4SLR(5) - C4SLR(4) - C4FFR(3) - C4(2) -  GETOW(1) - GETOA(0) (ENTER) (%MODE%): 
 IF "%MODE%"=="" GOTO GETOA
 IF "%MODE%"=="0" GOTO GETOA
 IF "%MODE%"=="1" GOTO GETOW
@@ -19,9 +19,9 @@ IF "%MODE%"=="6" GOTO C4YTR
 IF "%MODE%"=="7" GOTO EXIT
 :GETOA
 ECHO.
-CLS && ECHO ##################################################
-ECHO ### GETOA ###  O N L I N E   A L L   L I S T  ####
-ECHO ##################################################
+CLS && ECHO ############################################################
+ECHO ### GETOA ###  C A M 4   O N L I N E   A L L   L I S T  ####
+ECHO ############################################################
 cd C:/
 COLOR 0F
 cd -c4-py
@@ -31,9 +31,9 @@ PAUSE
 GOTO START
 :GETOW
 ECHO.
-CLS && ECHO ########################################################
-ECHO ### GETOW ###  O N L I N E   W A N T E D   L I S T  ####
-ECHO ########################################################
+CLS && ECHO ##################################################################
+ECHO ### GETOW ###  C A M 4   O N L I N E   W A N T E D   L I S T  ####
+ECHO ##################################################################
 cd C:/
 COLOR 0F
 cd -c4-py
@@ -43,9 +43,9 @@ PAUSE
 GOTO START
 :C4
 ECHO.
-CLS && ECHO ###############################################
-ECHO ### C4 ###### R E C O R D I N G ###############
-ECHO ###############################################
+CLS && ECHO #########################################################
+ECHO ### C4 ######  C A M 4  R E C O R D I N G ###############
+ECHO #########################################################
 cd C:/
 COLOR 0F
 cd -c4-py
