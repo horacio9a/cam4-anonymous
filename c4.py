@@ -1,4 +1,4 @@
-# Cam4 Anonymous All Modes Recorder v.2.0.2 by horacio9a for Python 2.7.18
+# Cam4 Anonymous All Modes Recorder v.2.1.0 by horacio9a for Python 2.7.18
 # coding: utf-8
 
 import sys, os, urllib, urllib3, ssl, re, time, datetime, requests, random, command
@@ -11,6 +11,7 @@ from termcolor import colored
 import configparser
 Config = configparser.ConfigParser()
 Config.read('config.ini')
+country_domain = Config.get('settings', 'country_domain')
 
 init()
 print
@@ -81,38 +82,48 @@ if mod == 'C4OW':
 if mod == 'C4OA':
   while True:
      try:
-        c4oa = int(raw_input(colored(' => Select => <500(0) <1000(1) <1500(2) <2000(3) <2500(4) <3000(5) <3500(6) => ', 'white', 'on_blue')))
+        c4oa = int(raw_input(colored(' => Select => <250(0) <500(1) <750(2) <1000(3) <1250(4) <1500(5) <1750(6) <2000(7) <2250(8) <2500(9) <2750(10) <3000(11) => ', 'white', 'on_blue')))
         print
         break
      except ValueError:
         print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
-  if c4oa > 6:
+  if c4oa > 11:
      sys.exit()
   if c4oa == 0:
-     oa = 'OA500'
+     oa = 'OA250'
   if c4oa == 1:
-     oa = 'OA1000'
+     oa = 'OA500'
   if c4oa == 2:
-     oa = 'OA1500'
+     oa = 'OA750'
   if c4oa == 3:
-     oa = 'OA2000'
+     oa = 'OA1000'
   if c4oa == 4:
-     oa = 'OA2500'
+     oa = 'OA1250'
   if c4oa == 5:
-     oa = 'OA3000'
+     oa = 'OA1500'
   if c4oa == 6:
-     oa = 'OA3500'
+     oa = 'OA1750'
+  if c4oa == 7:
+     oa = 'OA2000'
+  if c4oa == 8:
+     oa = 'OA2250'
+  if c4oa == 9:
+     oa = 'OA2500'
+  if c4oa == 10:
+     oa = 'OA2750'
+  if c4oa == 11:
+     oa = 'OA3000'
 
-  if oa == 'OA500':
+  if oa == 'OA250':
     while True:
        try:
           modellist = open(Config.get('files', 'online_all_model_list'),'r')
           for (num, value) in enumerate(modellist):
-            if num in range (500, 5000):
+            if num in range (250, 3000):
               break
-            print ' =>',(num+1),value[:-1]
+            print' =>',(num+1),value[:-1]
           print
-          mn = int(raw_input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -124,7 +135,55 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print
+
+  if oa == 'OA500':
+    while True:
+       try:
+          modellist = open(Config.get('files', 'online_all_model_list'),'r')
+          for (num, value) in enumerate(modellist):
+            if num in range (500, 3000):
+              break
+            print' =>',(num+1),value[:-1]
+          print
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          print
+          nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
+          if mn > nr_lines:
+             print(colored(' => Too big number <=', 'white', 'on_red'))
+             print
+             print(colored(' => END <=', 'white','on_blue'))
+             sys.exit()
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
+    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print
+
+  if oa == 'OA750':
+    while True:
+       try:
+          modellist = open(Config.get('files', 'online_all_model_list'),'r')
+          for (num, value) in enumerate(modellist):
+             if num in range (750, 3000):
+                break
+             print' =>',(num+1),value[:-1]
+          print
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          print
+          nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
+          if mn > nr_lines:
+             print(colored(' => Too big number <=', 'white', 'on_red'))
+             print
+             print(colored(' => END <=', 'white','on_blue'))
+             sys.exit()
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
+    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
     print
 
   if oa == 'OA1000':
@@ -132,11 +191,11 @@ if mod == 'C4OA':
        try:
           modellist = open(Config.get('files', 'online_all_model_list'),'r')
           for (num, value) in enumerate(modellist):
-            if num in range (1000, 5000):
-              break
-            print ' =>',(num+1),value[:-1]
+             if num in range (1000, 3000):
+                break
+             print' =>',(num+1),value[:-1]
           print
-          mn = int(raw_input(colored(' => Select C4 Online All Model => ', 'white', 'on_blue')))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -148,7 +207,31 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print
+
+  if oa == 'OA1250':
+    while True:
+       try:
+          modellist = open(Config.get('files', 'online_all_model_list'),'r')
+          for (num, value) in enumerate(modellist):
+             if num in range (1250, 3000):
+                break
+             print' =>',(num+1),value[:-1]
+          print
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          print
+          nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
+          if mn > nr_lines:
+             print(colored(' => Too big number <=', 'white', 'on_red'))
+             print
+             print(colored(' => END <=', 'white','on_blue'))
+             sys.exit()
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
+    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
     print
 
   if oa == 'OA1500':
@@ -156,11 +239,11 @@ if mod == 'C4OA':
        try:
           modellist = open(Config.get('files', 'online_all_model_list'),'r')
           for (num, value) in enumerate(modellist):
-            if num in range (1500, 5000):
-              break
-            print ' =>',(num+1),value[:-1]
+             if num in range (1500, 3000):
+                break
+             print' =>',(num+1),value[:-1]
           print
-          mn = int(raw_input(colored(' => Select C4 Online All Model => ', 'white', 'on_blue')))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -172,7 +255,25 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print
+
+  if oa == 'OA1750':
+    while True:
+       try:
+          modellist = open(Config.get('files', 'online_all_model_list'),'r')
+          for (num, value) in enumerate(modellist):
+             if num in range (1750, 3000):
+                break
+             print' =>',(num+1),value[:-1]
+          print
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          print
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
+    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
     print
 
   if oa == 'OA2000':
@@ -180,11 +281,11 @@ if mod == 'C4OA':
        try:
           modellist = open(Config.get('files', 'online_all_model_list'),'r')
           for (num, value) in enumerate(modellist):
-            if num in range (2000, 5000):
-              break
-            print ' =>',(num+1),value[:-1]
+             if num in range (2000, 3000):
+                break
+             print' =>',(num+1),value[:-1]
           print
-          mn = int(raw_input(colored(' => Select C4 Online All Model => ', 'white', 'on_blue')))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -196,7 +297,31 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print
+
+  if oa == 'OA2250':
+    while True:
+       try:
+          modellist = open(Config.get('files', 'online_all_model_list'),'r')
+          for (num, value) in enumerate(modellist):
+             if num in range (2250, 3000):
+                break
+             print' =>',(num+1),value[:-1]
+          print
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          print
+          nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
+          if mn > nr_lines:
+             print(colored(' => Too big number <=', 'white', 'on_red'))
+             print
+             print(colored(' => END <=', 'white','on_blue'))
+             sys.exit()
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
+    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
     print
 
   if oa == 'OA2500':
@@ -204,11 +329,11 @@ if mod == 'C4OA':
        try:
           modellist = open(Config.get('files', 'online_all_model_list'),'r')
           for (num, value) in enumerate(modellist):
-            if num in range (2500, 5000):
-              break
-            print ' =>',(num+1),value[:-1]
+             if num in range (2500, 3000):
+                break
+             print' =>',(num+1),value[:-1]
           print
-          mn = int(raw_input(colored(' => Select C4 Online All Model => ', 'white', 'on_blue')))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -220,19 +345,43 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
     print
-
+	
+  if oa == 'OA2750':
+    while True:
+       try:
+          modellist = open(Config.get('files', 'online_all_model_list'),'r')
+          for (num, value) in enumerate(modellist):
+             if num in range (2750, 3000):
+                break
+             print' =>',(num+1),value[:-1]
+          print
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
+          print
+          nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
+          if mn > nr_lines:
+             print(colored(' => Too big number <=', 'white', 'on_red'))
+             print
+             print(colored(' => END <=', 'white','on_blue'))
+             sys.exit()
+          break
+       except ValueError:
+          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
+    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
+    print
+	
   if oa == 'OA3000':
     while True:
        try:
           modellist = open(Config.get('files', 'online_all_model_list'),'r')
           for (num, value) in enumerate(modellist):
-            if num in range (3000, 5000):
-              break
-            print ' =>',(num+1),value[:-1]
+             if num in range (3000, 3000):
+                break
+             print' =>',(num+1),value[:-1]
           print
-          mn = int(raw_input(colored(' => Select C4 Online All Model => ', 'white', 'on_blue')))
+          mn = int(input(colored(' => Select C4 Online All Models => ', 'white', 'on_blue')))
           print
           nr_lines = sum(1 for line in open(Config.get('files', 'online_all_model_list')))
           if mn > nr_lines:
@@ -244,50 +393,25 @@ if mod == 'C4OA':
        except ValueError:
           print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
     model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
-    print
-
-  if oa == 'OA3500':
-    while True:
-       try:
-          modellist = open(Config.get('files', 'online_all_model_list'),'r')
-          for (num, value) in enumerate(modellist):
-            if num in range (3500, 5000):
-              break
-            print ' =>',(num+1),value[:-1]
-          print
-          mn = int(raw_input(colored(' => Select C4 Online All Model => ', 'white', 'on_blue')))
-          print
-          break
-       except ValueError:
-          print(colored('\n => Input must be a number <=\n', 'white', 'on_red'))
-    model = open(Config.get('files', 'online_all_model_list'), 'r').readlines()[mn-1][:-1]
-    print (colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model)
+    print ((colored(' => Selected C4 Online All Model => {} <=', 'white', 'on_blue')).format(model))
     print
 	
-url ='https://www.cam4.com/rest/v1.0/profile/{}/streamInfo'.format(model)
+url ='https://{}.cam4.com/rest/v1.0/profile/{}/streamInfo'.format(country_domain, model)
 manager = PoolManager(10)
 r = manager.request('GET', url)
 enc = (r.data)
 dec=urllib.unquote(enc)
 
-if 'canUseCDN":true' in dec:
-    hlsurl0 = dec.split('cdnURL":"')[1]
-    hlsurl = hlsurl0.split('"')[0]
-    if len(hlsurl) > 0:
+if len(dec) > 0:
+      hlsur2 = dec.split('cdnURL":"')[1]
+      hlsurl = hlsur2.split('"')[0]
+      print ((colored(' => HlsUrl => {} <=', 'white', 'on_magenta')).format(hlsurl))
+      print
       try:
-        streamName0 = dec.split('streamName":"')[1]
-        streamName = streamName0.split('-')[0]
-      except:
-        sys.exit()
-
-      while True:
-         try:
-            mode = int(raw_input(colored(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - PLAYER(0) => ', 'white', 'on_green')))
-            break
-         except ValueError:
-            print
-            print(colored(' => Input must be a number <=', 'white', 'on_red'))
+         mode = int(raw_input(colored(' => Mode => Exit(6) - URL(5) - YTDL(4) - LS(3) - SL(2) - FFMPEG(1) - PLAYER(0) => ', 'white', 'on_green')))
+      except ValueError:
+         print
+         print(colored(' => Input must be a number <=', 'white', 'on_red'))
       if mode > 6:
          print
          print(colored(' => Too big number <=', 'white', 'on_red'))
@@ -310,11 +434,11 @@ if 'canUseCDN":true' in dec:
       timestamp = str(time.strftime('%d%m%Y-%H%M%S'))
       stime = str(time.strftime('%H:%M:%S'))
       path = Config.get('folders', 'output_folder')
-      fn = streamName + '_C4_' + timestamp
-      fn1 = streamName + '_C4_' + timestamp + '.flv'
-      fn2 = streamName + '_C4_' + timestamp + '.mp4'
-      fn3 = streamName + '_C4_' + timestamp + '.ts'
-      fn4 = streamName + '_C4_' + timestamp + '.txt'
+      fn = model + '_C4_' + timestamp
+      fn1 = model + '_C4_' + timestamp + '.flv'
+      fn2 = model + '_C4_' + timestamp + '.mp4'
+      fn3 = model + '_C4_' + timestamp + '.ts'
+      fn4 = model + '_C4_' + timestamp + '.txt'
       pf1 = (path + fn1)
       pf2 = (path + fn2)
       pf3 = (path + fn3)
@@ -359,6 +483,7 @@ if 'canUseCDN":true' in dec:
       if mod == 'FFMPEG':
          print
          print (colored(' => FFMPEG-REC => {} <=', 'white', 'on_red')).format(fn1)
+         print
          command = ('{} -hide_banner -loglevel panic -i {} -c:v copy -c:a aac -b:a 128k {}'.format(ffmpeg,hlsurl,pf1))
          os.system(command)
          sys.exit()
@@ -386,6 +511,7 @@ if 'canUseCDN":true' in dec:
       if mod == 'YTDL':
          print
          print (colored(' => YTDL-REC => {} <=', 'white', 'on_red')).format(fn3)
+         print
          command = ('{} -i --geo-bypass --hls-use-mpegts --no-part -q --no-warnings --no-check-certificate {} -o {}'.format(youtube,hlsurl,pf3))
          os.system(command)
          print
@@ -406,9 +532,6 @@ if 'canUseCDN":true' in dec:
          print
          print(colored(' => END <=', 'white','on_blue'))
          sys.exit()
-
-    else:
-      sys.exit()
 
 else:
    print(colored(' => Model is offline or wrong name <=', 'white','on_red'))
